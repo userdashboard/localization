@@ -1,0 +1,39 @@
+name: update-translations-mhr
+
+on: [push]
+
+jobs:
+  update-translations:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.head_ref }}
+    - name: Update translation
+      run: |
+        git config --global user.name "${{ secrets.NAME }}"
+        git config --global user.email "${{ secrets.EMAIL }}"
+        npm install @userdashboard/dashboard --no-save
+        mkdir project
+        cd project
+        git clone https://github.com/userdashboard/dashboard.git
+        git clone https://github.com/userdashboard/maxmind-geoip.git
+        git clone https://github.com/userdashboard/organizations.git
+        git clone https://github.com/userdashboard/stripe-connect.git
+        git clone https://github.com/userdashboard/stripe-subscriptions.git
+        cd dashboard
+        npm install
+        cd ../..
+        wget https://git.io/trans
+        chmod +x ./trans
+        sudo mv trans /usr/local/bin
+        node localize.js mhr
+        git pull
+    - name: Commit translation
+      uses: stefanzweifel/git-auto-commit-action@v4.1.6
+      with:
+        commit_message: Automatically regenerated against current version
+        branch: ${{ github.head_ref }}
+        commit_options: "--no-verify --signoff"
+        repository: .
+        push_options: "--force"
