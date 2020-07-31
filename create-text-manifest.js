@@ -1,16 +1,22 @@
 const childProcess = require('child_process')
 const path = require('path')
 const fs = require('fs')
-const HTML = require('./project/dashboard/node_modules/server-html/index.js')
+const dashboardPath = process.argv[3] || './project'
+const HTML = require(`${dashboardPath}/dashboard/node_modules/server-html/index.js`)
 const util = require('util')
 const translatingTags = []
 const translatingTagsIndex = {}
 
 const scanFiles = util.promisify((callback) => {
   let files = []
-  for (const project of ['dashboard', 'organizations', 'stripe-subscriptions', 'stripe-connect']) {
-    const stdout = childProcess.execSync(`find ./project/${project}/src -type f -name "*.html"`)
+  if (process.argv[3]) {
+    const stdout = childProcess.execSync(`find ${dashboardPath}/src -type f -name "*.html"`)
     files = files.concat(stdout.toString().split('\n'))
+  } else {
+    for (const project of ['dashboard', 'organizations', 'stripe-subscriptions', 'stripe-connect']) {
+      const stdout = childProcess.execSync(`find ${dashboardPath}/${project}/src -type f -name "*.html"`)
+      files = files.concat(stdout.toString().split('\n'))
+    }
   }
   return callback(null, files)
 })
