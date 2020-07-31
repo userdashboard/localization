@@ -1,8 +1,12 @@
 const childProcess = require('child_process')
-const path = require('path')
 const fs = require('fs')
 const dashboardPath = process.argv[3] || './project'
-const HTML = require(`${dashboardPath}/dashboard/node_modules/server-html/index.js`)
+let HTML
+if (process.argv[3]) {
+  HTML = require(`${dashboardPath}/node_modules/server-html/index.js`)
+} else {
+  HTML = require(`${dashboardPath}/dashboard/node_modules/server-html/index.js`)
+}
 const util = require('util')
 const translatingTags = []
 const translatingTagsIndex = {}
@@ -61,11 +65,10 @@ function scanElement (element, file, addedHTMLTags) {
 
 module.exports = async () => {
   const files = await scanFiles()
-  for (const file of files) {
-    if (!file.endsWith('.html')) {
+  for (const filePath of files) {
+    if (!filePath.endsWith('.html')) {
       continue
     }
-    const filePath = path.join(__dirname, file)
     let rawHTML = fs.readFileSync(filePath).toString()
     let addedHTMLTags = false
     if (rawHTML.indexOf('<html') === -1) {
