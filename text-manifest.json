@@ -3811,6 +3811,15 @@
   },
   {
     "file": [
+      "./project/dashboard/src/menu-administrator.html"
+    ],
+    "html": [
+      "<a href=\"/administrator\" translate=\"yes\">Dashboard administration</a>"
+    ],
+    "text": "Dashboard administration"
+  },
+  {
+    "file": [
       "./project/organizations/src/menu-account.html",
       "./project/organizations/src/www/account/organizations/navbar-organizations.html",
       "./project/organizations/src/www/account/organizations/navbar-membership.html",
