@@ -6,7 +6,7 @@ const htmlPath1 = childProcess.execSync('find /tmp/project -type f -name html.js
 if (fs.existsSync(htmlPath1)) {
   HTML = require(htmlPath1)
 } else {
-  const htmlPath2 = childProcess.execSync('find ~/ -name -type f html.js')
+  const htmlPath2 = childProcess.execSync('find ~/-type f  -name html.js')
   HTML = require(htmlPath2)
 }
 const util = require('util')
