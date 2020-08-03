@@ -5,6 +5,7 @@ const HTML = require('@userdashboard/dashboard/src/html.js')
 const util = require('util')
 const translatingTags = []
 const translatingTagsIndex = {}
+global.rootPath = __dirname
 
 const scanFiles = util.promisify((callback) => {
   let files = []
@@ -65,6 +66,9 @@ module.exports = async () => {
       continue
     }
     let rawHTML = fs.readFileSync(filePath).toString()
+    if (!rawHTML || !rawHTML.length) {
+      continue
+    }
     let addedHTMLTags = false
     if (rawHTML.indexOf('<html') === -1) {
       rawHTML = `<html>${rawHTML}</html>`
