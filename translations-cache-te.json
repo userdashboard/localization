@@ -12562,5 +12562,15 @@
     ],
     "text": "accounts",
     "translation": "ఖాతాల"
+  },
+  "Dashboard administration": {
+    "file": [
+      "./project/dashboard/src/menu-administrator.html"
+    ],
+    "html": [
+      "<a href=\"/administrator\" translate=\"yes\">Dashboard administration</a>"
+    ],
+    "text": "Dashboard administration",
+    "translation": "డాష్u200cబోర్డ్ పరిపాలన"
   }
 }
