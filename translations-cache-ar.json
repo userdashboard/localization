@@ -12562,5 +12562,15 @@
     ],
     "text": "Error! Invalid or missing Kanji last name",
     "translation": "دوقفم وأ حلاص ريغ يجناك ةلئاع مسا !أطخ"
+  },
+  "Dashboard administration": {
+    "file": [
+      "./project/dashboard/src/menu-administrator.html"
+    ],
+    "html": [
+      "<a href=\"/administrator\" translate=\"yes\">Dashboard administration</a>"
+    ],
+    "text": "Dashboard administration",
+    "translation": "ةدايقلا ةحول ةرادإ"
   }
 }
