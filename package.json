@@ -17,5 +17,7 @@
     "url": "https://github.com/userdashboard/localization/issues"
   },
   "homepage": "https://github.com/userdashboard/localization#readme",
-  "dependencies": {}
+  "dependencies": {
+    "server-html": "^9.0.0"
+  }
 }
