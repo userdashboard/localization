@@ -12562,5 +12562,15 @@
     ],
     "text": "Error! Invalid or missing Kanji last name",
     "translation": "பிழை! காஞ்சியின் கடைசி பெயர் தவறானது அல்லது காணவில்லை"
+  },
+  "Dashboard administration": {
+    "file": [
+      "./project/dashboard/src/menu-administrator.html"
+    ],
+    "html": [
+      "<a href=\"/administrator\" translate=\"yes\">Dashboard administration</a>"
+    ],
+    "text": "Dashboard administration",
+    "translation": "டாஷ்போர்டு நிர்வாகம்"
   }
 }
