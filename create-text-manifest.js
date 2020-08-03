@@ -1,12 +1,7 @@
 const childProcess = require('child_process')
 const fs = require('fs')
 const dashboardPath = process.argv[3] || './project'
-let HTML
-if (fs.existsSync(`${dashboardPath}/node_modules/server-html/index.js`)) {
-  HTML = require(`${dashboardPath}/node_modules/server-html/index.js`)
-} else {
-  HTML = require(`${dashboardPath}/dashboard/node_modules/server-html/index.js`)
-}
+const HTML = require('@userdashboard/dashboard/src/html.js')
 const util = require('util')
 const translatingTags = []
 const translatingTagsIndex = {}
