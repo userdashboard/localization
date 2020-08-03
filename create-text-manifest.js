@@ -6,6 +6,7 @@ const util = require('util')
 const translatingTags = []
 const translatingTagsIndex = {}
 global.rootPath = __dirname
+global.applicationPath = __dirname
 
 const scanFiles = util.promisify((callback) => {
   let files = []
