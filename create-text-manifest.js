@@ -1,12 +1,10 @@
 const childProcess = require('child_process')
 const fs = require('fs')
 const dashboardPath = process.argv[3] || './project'
-const HTML = require('@userdashboard/dashboard/src/html.js')
+const HTML = require('server-html')
 const util = require('util')
 const translatingTags = []
 const translatingTagsIndex = {}
-global.rootPath = __dirname
-global.applicationPath = __dirname
 
 const scanFiles = util.promisify((callback) => {
   let files = []
