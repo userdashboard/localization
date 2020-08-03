@@ -1,7 +1,14 @@
 const childProcess = require('child_process')
 const fs = require('fs')
 const dashboardPath = process.argv[3] || './project'
-const HTML = require('server-html')
+let HTML
+const htmlPath1 = childProcess.execSync('find -type f /tmp/project -name html.js')
+if (fs.existsSync(htmlPath1)) {
+  HTML = require(htmlPath1)
+} else {
+  const htmlPath2 = childProcess.execSync('find -type f ~/ -name html.js')
+  HTML = require(htmlPath2)
+}
 const util = require('util')
 const translatingTags = []
 const translatingTagsIndex = {}
