@@ -12562,5 +12562,15 @@
     ],
     "text": "accounts",
     "translation": "계정"
+  },
+  "Dashboard administration": {
+    "file": [
+      "./project/dashboard/src/menu-administrator.html"
+    ],
+    "html": [
+      "<a href=\"/administrator\" translate=\"yes\">Dashboard administration</a>"
+    ],
+    "text": "Dashboard administration",
+    "translation": "대시 보드 관리"
   }
 }
