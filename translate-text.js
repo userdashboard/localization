@@ -1,29 +1,40 @@
 const childProcess = require('child_process')
 const fs = require('fs')
 const locale = process.argv[2]
+const path = require('path')
 const util = require('util')
+const cacheFile = path.join(__dirname, `translations-cache-${locale}.json`)
 let translations
-if (fs.existsSync(`./translations-cache-${locale}.json`)) {
-  translations = require(`./translations-cache-${locale}.json`)
+if (fs.existsSync(cacheFile)) {
+  translations = JSON.parse(fs.readFileSync(cacheFile).toString())
 } else {
   translations = {}
 }
-
 module.exports = async (original) => {
-  const lines = []
   for (const data of original) {
-    if (translations[data.text] && translations[data.text].translation) {
-      continue
+    if (!translations[data.text]) {
+      translations[data.text] = data
+    } else {
+      for (const i in data.file) {
+        if (translations[data.text].file.indexOf(data.file[i]) === -1) {
+          translations[data.text].file.push(data.file[i])
+          translations[data.text].html.push(data.html[i])
+        }
+      }
     }
-    if (!data.text.length) {
-      throw new Error('what is this data ' + JSON.stringify(data))
+  }
+  const lines = []
+  for (const phrase in translations) {
+    const data = translations[phrase]
+    if (!data.translation) {
+      lines.push(data.text)
     }
-    lines.push(data.text)
-    translations[data.text] = data
   }
   if (!lines.length) {
-    return translations
+    console.log('no new phrases')
+    return null
   }
+  console.log('translating', lines.length)
   let retries1 = 0
   let retries2 = 0
   while (true) {

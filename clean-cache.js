@@ -1,25 +1,24 @@
 const fs = require('fs')
+const path = require('path')
 const locale = process.argv[2]
-const oldPath = process.argv[3]
-const newPath = process.argv[4]
+const newPath = process.argv[3]
+const cacheFile = path.join(__dirname, `translations-cache-${locale}.json`)
+let cache
+if (fs.existsSync(cacheFile)) {
+  cache = JSON.parse(fs.readFileSync(cacheFile).toString())
+} else {
+  cache = {}
+}
 
-const cache = require(`./translations-cache-${locale}.json`)
 for (const phrase in cache) {
   const cacheData = cache[phrase]
-  const splicing = []
   for (const i in cacheData.file) {
     let file = cacheData.file[i]
-    if (file.startsWith(oldPath)) {
-      file = newPath + file.substring(oldPath.length)
+    const srcIndex = file.indexOf('/src')
+    if (srcIndex > -1) {
+      file = file.substring(srcIndex)
       cacheData.file[i] = file
-    } else {
-      splicing.push(i)
-    }
-  }
-  splicing.reverse()
-  for (const i of splicing) {
-    cacheData.file.splice(i, 1)
-    cacheData.html.splice(i, 1)
+    } 
   }
 }
 fs.writeFileSync(`./translations-cache-${locale}.json`, JSON.stringify(cache, null, '  '))

@@ -1,6 +1,7 @@
 const childProcess = require('child_process')
 const fs = require('fs')
 const locale = process.argv[2]
+const path = require('path')
 
 module.exports = async (translation) => {
   const htmlCache = {}
@@ -21,7 +22,11 @@ module.exports = async (translation) => {
         console.log('huh tags are the same', locale, newTag)
         continue
       }
-      let rawHTML = htmlCache[file] = htmlCache[file] || fs.readFileSync(file).toString()
+      const filePath = path.join(process.argv[3], file)
+      if (!htmlCache[file] && !fs.existsSync(filePath)) {
+        continue
+      }
+      let rawHTML = htmlCache[file] = htmlCache[file] || fs.readFileSync(filePath).toString()
       // direct match on the tag
       if (rawHTML.indexOf(oldTag) > -1) {
         rawHTML = rawHTML.replace(oldTag, newTag)
@@ -45,7 +50,11 @@ module.exports = async (translation) => {
       if (!newText) {
         continue
       }
-      let rawHTML = htmlCache[file] = htmlCache[file] || fs.readFileSync(file).toString()
+      const filePath = path.join(process.argv[3], file)
+      if (!fs.existsSync(filePath)) {
+        continue
+      }
+      let rawHTML = htmlCache[file] = htmlCache[file] || fs.readFileSync(filePath).toString()
       rawHTML = rawHTML.split(phrase).join(newText)
       htmlCache[file] = rawHTML
     }
@@ -53,8 +62,11 @@ module.exports = async (translation) => {
   for (const file in htmlCache) {
     const rawHTML = htmlCache[file]
     const newFile = file.replace('/src/', `/languages/${locale}/`)
+    const fullNewFile = path.join(process.argv[3], newFile)
     const newFilePath = newFile.substring(0, newFile.lastIndexOf('/'))
-    childProcess.execSync(`mkdir -p ${newFilePath}`)
-    fs.writeFileSync(newFile, rawHTML)
+    const fullNewFilePath = path.join(process.argv[3], newFilePath)
+    childProcess.execSync(`mkdir -p ${fullNewFilePath}`)
+    childProcess.execSync(`mkdir -p ${fullNewFilePath}`)
+    fs.writeFileSync(fullNewFile, rawHTML)
   }
 }

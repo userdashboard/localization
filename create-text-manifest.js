@@ -37,12 +37,13 @@ function scanElement (element, file, addedHTMLTags) {
       text = text.substring(0, text.length - 2)
     }
     text = text.trim()
+    const fileShort = file.substring(file.indexOf('/src'))
     if (translatingTagsIndex[text]) {
-      translatingTagsIndex[text].file.push(file)
+      translatingTagsIndex[text].file.push(fileShort)
       translatingTagsIndex[text].html.push(element.toString())
     } else {
       translatingTagsIndex[text] = {
-        file: [file],
+        file: [fileShort],
         html: [element.toString()],
         text,
         addedHTMLTags
