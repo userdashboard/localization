@@ -7206,11 +7206,15 @@
   "Requires payment method": {
     "file": [
       "/src/www/administrator/subscriptions/setup-intents.html",
-      "/src/www/administrator/subscriptions/payment-intents.html"
+      "/src/www/administrator/subscriptions/payment-intents.html",
+      "/src/www/administrator/subscriptions/payment-intent.html",
+      "/src/www/administrator/subscriptions/setup-intent.html"
     ],
     "html": [
       "<span translate=\"yes\">Requires payment method</span>",
-      "<span translate=\"yes\">Requires payment method</span>"
+      "<span translate=\"yes\">Requires payment method</span>",
+      "<td id=\"requires_payment_method\" translate=\"yes\">Requires payment method</td>",
+      "<td id=\"requires_payment_method\" translate=\"yes\">Requires payment method</td>"
     ],
     "text": "Requires payment method",
     "translation": "ಪಾವತಿ ವಿಧಾನದ ಅಗತ್ಯವಿದೆ"
@@ -7218,11 +7222,15 @@
   "Requires confirmation": {
     "file": [
       "/src/www/administrator/subscriptions/setup-intents.html",
-      "/src/www/administrator/subscriptions/payment-intents.html"
+      "/src/www/administrator/subscriptions/payment-intents.html",
+      "/src/www/administrator/subscriptions/payment-intent.html",
+      "/src/www/administrator/subscriptions/setup-intent.html"
     ],
     "html": [
       "<span translate=\"yes\">Requires confirmation</span>",
-      "<span translate=\"yes\">Requires confirmation</span>"
+      "<span translate=\"yes\">Requires confirmation</span>",
+      "<td id=\"requires_confirmation\" translate=\"yes\">Requires confirmation</td>",
+      "<td id=\"requires_confirmation\" translate=\"yes\">Requires confirmation</td>"
     ],
     "text": "Requires confirmation",
     "translation": "ದೃ mation ೀಕರಣದ ಅಗತ್ಯವಿದೆ"
@@ -7230,11 +7238,15 @@
   "Requires action": {
     "file": [
       "/src/www/administrator/subscriptions/setup-intents.html",
-      "/src/www/administrator/subscriptions/payment-intents.html"
+      "/src/www/administrator/subscriptions/payment-intents.html",
+      "/src/www/administrator/subscriptions/payment-intent.html",
+      "/src/www/administrator/subscriptions/setup-intent.html"
     ],
     "html": [
       "<span translate=\"yes\">Requires action</span>",
-      "<span translate=\"yes\">Requires action</span>"
+      "<span translate=\"yes\">Requires action</span>",
+      "<td id=\"requires_action\" translate=\"yes\">Requires action</td>",
+      "<td id=\"requires_action\" translate=\"yes\">Requires action</td>"
     ],
     "text": "Requires action",
     "translation": "ಕ್ರಿಯೆಯ ಅಗತ್ಯವಿದೆ"
@@ -7242,11 +7254,13 @@
   "Processing": {
     "file": [
       "/src/www/administrator/subscriptions/setup-intents.html",
-      "/src/www/administrator/subscriptions/payment-intents.html"
+      "/src/www/administrator/subscriptions/payment-intents.html",
+      "/src/www/administrator/subscriptions/payment-intent.html"
     ],
     "html": [
       "<span translate=\"yes\">Processing</span>",
-      "<span translate=\"yes\">Processing</span>"
+      "<span translate=\"yes\">Processing</span>",
+      "<td id=\"processing\" translate=\"yes\">Processing</td>"
     ],
     "text": "Processing",
     "translation": "ಸಂಸ್ಕರಣೆ"
@@ -7255,12 +7269,16 @@
     "file": [
       "/src/www/administrator/subscriptions/setup-intents.html",
       "/src/www/administrator/subscriptions/subscription.html",
-      "/src/www/administrator/subscriptions/payment-intents.html"
+      "/src/www/administrator/subscriptions/payment-intents.html",
+      "/src/www/administrator/subscriptions/payment-intent.html",
+      "/src/www/administrator/subscriptions/setup-intent.html"
     ],
     "html": [
       "<span translate=\"yes\">Canceled</span>",
       "<td translate=\"yes\">Canceled</td>",
-      "<span translate=\"yes\">Canceled</span>"
+      "<span translate=\"yes\">Canceled</span>",
+      "<td id=\"canceled\" translate=\"yes\">Canceled</td>",
+      "<td id=\"canceled\" translate=\"yes\">Canceled</td>"
     ],
     "text": "Canceled",
     "translation": "ರದ್ದುಗೊಳಿಸಲಾಗಿದೆ"
@@ -7268,11 +7286,15 @@
   "Succeeded": {
     "file": [
       "/src/www/administrator/subscriptions/setup-intents.html",
-      "/src/www/administrator/subscriptions/payment-intents.html"
+      "/src/www/administrator/subscriptions/payment-intents.html",
+      "/src/www/administrator/subscriptions/payment-intent.html",
+      "/src/www/administrator/subscriptions/setup-intent.html"
     ],
     "html": [
       "<span translate=\"yes\">Succeeded</span>",
-      "<span translate=\"yes\">Succeeded</span>"
+      "<span translate=\"yes\">Succeeded</span>",
+      "<td id=\"succeeded\" translate=\"yes\">Succeeded</td>",
+      "<td id=\"succeeded\" translate=\"yes\">Succeeded</td>"
     ],
     "text": "Succeeded",
     "translation": "ಯಶಸ್ವಿಯಾಗಿದೆ"
@@ -7874,7 +7896,8 @@
       "/src/www/administrator/subscriptions/navbar-plan.html",
       "/src/www/administrator/subscriptions/navbar-product.html",
       "/src/www/administrator/subscriptions/unpublish-plan.html",
-      "/src/www/administrator/subscriptions/unpublish-plan.html"
+      "/src/www/administrator/subscriptions/unpublish-plan.html",
+      "/src/www/administrator/subscriptions/navbar-coupon.html"
     ],
     "html": [
       "<title translate=\"yes\">Unpublish ${coupon.id}</title>",
@@ -7884,7 +7907,8 @@
       "<a id=\"navbar-unpublish-link\" href=\"/administrator/subscriptions/unpublish-plan?planid=${plan.id}\" translate=\"yes\">Unpublish</a>",
       "<a id=\"navbar-unpublish-link\" href=\"/administrator/subscriptions/unpublish-product?productid=${product.id}\" translate=\"yes\">Unpublish</a>",
       "<title translate=\"yes\">Unpublish ${plan.id}</title>",
-      "<h1 translate=\"yes\">Unpublish ${plan.id}</h1>"
+      "<h1 translate=\"yes\">Unpublish ${plan.id}</h1>",
+      "<a id=\"navbar-unpublish-link\" href=\"/administrator/subscriptions/unpublish-coupon?couponid=${coupon.id}\" translate=\"yes\">Unpublish</a>"
     ],
     "text": "Unpublish",
     "translation": "ಪ್ರಕಟಿಸಬೇಡಿ"
@@ -9461,10 +9485,12 @@
   },
   "Requires source": {
     "file": [
-      "/src/www/administrator/subscriptions/payment-intents.html"
+      "/src/www/administrator/subscriptions/payment-intents.html",
+      "/src/www/administrator/subscriptions/payment-intent.html"
     ],
     "html": [
-      "<span translate=\"yes\">Requires source</span>"
+      "<span translate=\"yes\">Requires source</span>",
+      "<td id=\"requires_source\" translate=\"yes\">Requires source</td>"
     ],
     "text": "Requires source",
     "translation": "ಮೂಲ ಅಗತ್ಯವಿದೆ"
@@ -10688,11 +10714,13 @@
   "Company representative": {
     "file": [
       "/src/www/account/connect/stripe-account.html",
-      "/src/www/account/connect/persons.html"
+      "/src/www/account/connect/persons.html",
+      "/src/www/account/connect/person.html"
     ],
     "html": [
       "<h2 translate=\"yes\">Company representative</h2>",
-      "<h2 translate=\"yes\">Company representative</h2>"
+      "<h2 translate=\"yes\">Company representative</h2>",
+      "<td id=\"representative\" translate=\"yes\">Company representative</td>"
     ],
     "text": "Company representative",
     "translation": "ಕಂಪನಿ ಪ್ರತಿನಿಧಿ"
@@ -11236,11 +11264,13 @@
   "Individual registration": {
     "file": [
       "/src/www/account/connect/index.html",
-      "/src/www/account/connect/stripe-accounts.html"
+      "/src/www/account/connect/stripe-accounts.html",
+      "/src/www/account/connect/stripe-account.html"
     ],
     "html": [
       "<h2 translate=\"yes\">Individual registration</h2>",
-      "<h2 translate=\"yes\">Individual registration</h2>"
+      "<h2 translate=\"yes\">Individual registration</h2>",
+      "<td id=\"individual\" translate=\"yes\">Individual registration</td>"
     ],
     "text": "Individual registration",
     "translation": "ವೈಯಕ್ತಿಕ ನೋಂದಣಿ"
@@ -11260,11 +11290,17 @@
   "Not yet provided": {
     "file": [
       "/src/www/account/connect/index.html",
-      "/src/www/administrator/connect/stripe-accounts.html"
+      "/src/www/administrator/connect/stripe-accounts.html",
+      "/src/www/account/connect/stripe-account.html",
+      "/src/www/administrator/connect/stripe-account.html",
+      "/src/www/administrator/connect/delete-stripe-account.html"
     ],
     "html": [
       "<td id=\"blank-name-${account.id}\" translate=\"yes\">Not yet provided</td>",
-      "<td id=\"blank-name-${account.id}\" translate=\"yes\">Not yet provided</td>"
+      "<td id=\"blank-name-${account.id}\" translate=\"yes\">Not yet provided</td>",
+      "<td id=\"blank-name\" translate=\"yes\">Not yet provided</td>",
+      "<td id=\"blank-name\" translate=\"yes\">Not yet provided</td>",
+      "<td id=\"blank-name\" translate=\"yes\">Not yet provided</td>"
     ],
     "text": "Not yet provided",
     "translation": "ಇನ್ನೂ ಒದಗಿಸಿಲ್ಲ"
@@ -11272,11 +11308,15 @@
   "No": {
     "file": [
       "/src/www/account/connect/index.html",
-      "/src/www/account/profile.html"
+      "/src/www/account/profile.html",
+      "/src/www/account/organizations/invitation.html",
+      "/src/www/administrator/organizations/invitation.html"
     ],
     "html": [
       "<td id=\"not-submitted-${account.id}\" translate=\"yes\">No</td>",
-      "<td id=\"is-not-default\" translate=\"yes\">No</td>"
+      "<td id=\"is-not-default\" translate=\"yes\">No</td>",
+      "<td id=\"not-accepted\" translate=\"yes\">No</td>",
+      "<td id=\"not-accepted\" translate=\"yes\">No</td>"
     ],
     "text": "No",
     "translation": "ಇಲ್ಲ"
@@ -12577,12 +12617,254 @@
   },
   "Yes": {
     "file": [
-      "/src/www/account/profile.html"
+      "/src/www/account/profile.html",
+      "/src/www/account/organizations/invitation.html"
     ],
     "html": [
-      "<td id=\"is-default\" translate=\"yes\">Yes</td>"
+      "<td id=\"is-default\" translate=\"yes\">Yes</td>",
+      "<td id=\"accepted\" translate=\"yes\">Yes</td>"
     ],
     "text": "Yes",
     "translation": "ಹೌದು"
+  },
+  "Incorrect account holder name.": {
+    "file": [
+      "/src/www/administrator/subscriptions/payouts.html",
+      "/src/www/administrator/subscriptions/payout.html"
+    ],
+    "html": [
+      "<span translate=\"yes\">Incorrect account holder name.</span>",
+      "<span translate=\"yes\">Incorrect account holder name.</span>"
+    ],
+    "text": "Incorrect account holder name.",
+    "translation": "ತಪ್ಪಾದ ಖಾತೆದಾರರ ಹೆಸರು."
+  },
+  "Publish coupon": {
+    "file": [
+      "/src/www/administrator/subscriptions/publish-coupon.html"
+    ],
+    "html": [
+      "<button id=\"submit-button\" class=\"pure-button pure-button-primary\" type=\"submit\" translate=\"yes\">Publish coupon</button>"
+    ],
+    "text": "Publish coupon",
+    "translation": "ಕೂಪನ್ ಪ್ರಕಟಿಸಿ"
+  },
+  "Unpublish product": {
+    "file": [
+      "/src/www/administrator/subscriptions/unpublish-product.html"
+    ],
+    "html": [
+      "<button id=\"submit-button\" class=\"pure-button pure-button-primary\" type=\"submit\" translate=\"yes\">Unpublish product</button>"
+    ],
+    "text": "Unpublish product",
+    "translation": "ಉತ್ಪನ್ನವನ್ನು ಪ್ರಕಟಿಸಬೇಡಿ"
+  },
+  "Published": {
+    "file": [
+      "/src/www/administrator/subscriptions/product.html",
+      "/src/www/administrator/subscriptions/coupons.html",
+      "/src/www/administrator/subscriptions/coupon.html",
+      "/src/www/administrator/subscriptions/products.html",
+      "/src/www/administrator/subscriptions/plans.html",
+      "/src/www/administrator/subscriptions/plan.html"
+    ],
+    "html": [
+      "<td id=\"published\" translate=\"yes\">Published</td>",
+      "<td id=\"published-coupon-${coupon.id}\" translate=\"yes\">Published</td>",
+      "<td id=\"published\" translate=\"yes\">Published</td>",
+      "<td id=\"published-${product.id}\" translate=\"yes\">Published</td>",
+      "<td id=\"published-plan-${plan.id}\" translate=\"yes\">Published</td>",
+      "<td id=\"published\" translate=\"yes\">Published</td>"
+    ],
+    "text": "Published",
+    "translation": "ಪ್ರಕಟಿಸಲಾಗಿದೆ"
+  },
+  "Unpublished": {
+    "file": [
+      "/src/www/administrator/subscriptions/product.html",
+      "/src/www/administrator/subscriptions/coupons.html",
+      "/src/www/administrator/subscriptions/coupon.html",
+      "/src/www/administrator/subscriptions/products.html",
+      "/src/www/administrator/subscriptions/plans.html",
+      "/src/www/administrator/subscriptions/plan.html"
+    ],
+    "html": [
+      "<td id=\"unpublished\" translate=\"yes\">Unpublished</td>",
+      "<td id=\"unpublished-coupon-${coupon.id}\" translate=\"yes\">Unpublished</td>",
+      "<td id=\"unpublished\" translate=\"yes\">Unpublished</td>",
+      "<td id=\"unpublished-${product.id}\" translate=\"yes\">Unpublished</td>",
+      "<td id=\"unpublished-plan-${plan.id}\" translate=\"yes\">Unpublished</td>",
+      "<td id=\"unpublished\" translate=\"yes\">Unpublished</td>"
+    ],
+    "text": "Unpublished",
+    "translation": "ಅಪ್ರಕಟಿತ"
+  },
+  "Not yet published": {
+    "file": [
+      "/src/www/administrator/subscriptions/product.html",
+      "/src/www/administrator/subscriptions/coupon.html",
+      "/src/www/administrator/subscriptions/plan.html"
+    ],
+    "html": [
+      "<td id=\"not-published\" translate=\"yes\">Not yet published</td>",
+      "<td id=\"not-published\" translate=\"yes\">Not yet published</td>",
+      "<td id=\"not-published\" translate=\"yes\">Not yet published</td>"
+    ],
+    "text": "Not yet published",
+    "translation": "ಇನ್ನೂ ಪ್ರಕಟಗೊಂಡಿಲ್ಲ"
+  },
+  "Draft": {
+    "file": [
+      "/src/www/administrator/subscriptions/coupons.html",
+      "/src/www/administrator/subscriptions/plans.html"
+    ],
+    "html": [
+      "<td id=\"draft-coupon-${coupon.id}\" translate=\"yes\">Draft</td>",
+      "<td id=\"draft-plan-${plan.id}\" translate=\"yes\">Draft</td>"
+    ],
+    "text": "Draft",
+    "translation": "ಕರಡು"
+  },
+  "Unpublish coupon": {
+    "file": [
+      "/src/www/administrator/subscriptions/unpublish-coupon.html"
+    ],
+    "html": [
+      "<button id=\"submit-button\" class=\"pure-button pure-button-primary\" type=\"submit\" translate=\"yes\">Unpublish coupon</button>"
+    ],
+    "text": "Unpublish coupon",
+    "translation": "ಕೂಪನ್ ಪ್ರಕಟಿಸಬೇಡಿ"
+  },
+  "Unpublish plan": {
+    "file": [
+      "/src/www/administrator/subscriptions/unpublish-plan.html"
+    ],
+    "html": [
+      "<button id=\"submit-button\" class=\"pure-button pure-button-primary\" type=\"submit\" translate=\"yes\">Unpublish plan</button>"
+    ],
+    "text": "Unpublish plan",
+    "translation": "ಯೋಜನೆಯನ್ನು ಪ್ರಕಟಿಸಬೇಡಿ"
+  },
+  "Requires capture": {
+    "file": [
+      "/src/www/administrator/subscriptions/payment-intent.html",
+      "/src/www/administrator/subscriptions/setup-intent.html"
+    ],
+    "html": [
+      "<td id=\"requires_capture\" translate=\"yes\">Requires capture</td>",
+      "<td id=\"requires_capture\" translate=\"yes\">Requires capture</td>"
+    ],
+    "text": "Requires capture",
+    "translation": "ಕ್ಯಾಪ್ಚರ್ ಅಗತ್ಯವಿದೆ"
+  },
+  "Publish product": {
+    "file": [
+      "/src/www/administrator/subscriptions/publish-product.html"
+    ],
+    "html": [
+      "<button id=\"submit-button\" class=\"pure-button pure-button-primary\" type=\"submit\" translate=\"yes\">Publish product</button>"
+    ],
+    "text": "Publish product",
+    "translation": "ಉತ್ಪನ್ನವನ್ನು ಪ್ರಕಟಿಸಿ"
+  },
+  "You do not have any plans. Create a product and then create plans.": {
+    "file": [
+      "/src/www/administrator/subscriptions/index.html"
+    ],
+    "html": [
+      "<p id=\"no-plans\" translate=\"yes\">You do not have any plans. Create a product and then create plans.</p>"
+    ],
+    "text": "You do not have any plans. Create a product and then create plans.",
+    "translation": "ನೀವು ಯಾವುದೇ ಯೋಜನೆಗಳನ್ನು ಹೊಂದಿಲ್ಲ. ಉತ್ಪನ್ನವನ್ನು ರಚಿಸಿ ಮತ್ತು ನಂತರ ಯೋಜನೆಗಳನ್ನು ರಚಿಸಿ."
+  },
+  "You do not have any coupons. Coupons allow your customers to be discounted by yourself or administrators, and subscriptions to be discounted by customers.": {
+    "file": [
+      "/src/www/administrator/subscriptions/index.html"
+    ],
+    "html": [
+      "<p id=\"no-coupons\" translate=\"yes\">You do not have any coupons. Coupons allow your customers to be discounted by yourself or administrators, and subscriptions to be discounted by customers.</p>"
+    ],
+    "text": "You do not have any coupons. Coupons allow your customers to be discounted by yourself or administrators, and subscriptions to be discounted by customers.",
+    "translation": "ನೀವು ಯಾವುದೇ ಕೂಪನ್u200cಗಳನ್ನು ಹೊಂದಿಲ್ಲ. ಕೂಪನ್u200cಗಳು ನಿಮ್ಮ ಗ್ರಾಹಕರನ್ನು ನಿಮ್ಮಿಂದ ಅಥವಾ ನಿರ್ವಾಹಕರು ರಿಯಾಯಿತಿ ಮಾಡಲು ಮತ್ತು ಚಂದಾದಾರಿಕೆಗಳನ್ನು ಗ್ರಾಹಕರಿಂದ ರಿಯಾಯಿತಿ ಮಾಡಲು ಅನುಮತಿಸುತ್ತದೆ."
+  },
+  "You do not have any subscriptions. Create published products and plans for users to subscribe to.": {
+    "file": [
+      "/src/www/administrator/subscriptions/index.html"
+    ],
+    "html": [
+      "<p id=\"no-subscriptions\" translate=\"yes\">You do not have any subscriptions. Create published products and plans for users to subscribe to.</p>"
+    ],
+    "text": "You do not have any subscriptions. Create published products and plans for users to subscribe to.",
+    "translation": "ನೀವು ಯಾವುದೇ ಚಂದಾದಾರಿಕೆಗಳನ್ನು ಹೊಂದಿಲ್ಲ. ಬಳಕೆದಾರರು ಚಂದಾದಾರರಾಗಲು ಪ್ರಕಟಿತ ಉತ್ಪನ್ನಗಳು ಮತ್ತು ಯೋಜನೆಗಳನ್ನು ರಚಿಸಿ."
+  },
+  "Publish plan": {
+    "file": [
+      "/src/www/administrator/subscriptions/publish-plan.html"
+    ],
+    "html": [
+      "<button id=\"submit-button\" class=\"pure-button pure-button-primary\" type=\"submit\" translate=\"yes\">Publish plan</button>"
+    ],
+    "text": "Publish plan",
+    "translation": "ಯೋಜನೆಯನ್ನು ಪ್ರಕಟಿಸಿ"
+  },
+  "Requires setup method": {
+    "file": [
+      "/src/www/administrator/subscriptions/setup-intent.html"
+    ],
+    "html": [
+      "<td id=\"requires_setup_method\" translate=\"yes\">Requires setup method</td>"
+    ],
+    "text": "Requires setup method",
+    "translation": "ಸೆಟಪ್ ವಿಧಾನದ ಅಗತ್ಯವಿದೆ"
+  },
+  "Not published yet": {
+    "file": [
+      "/src/www/administrator/subscriptions/products.html"
+    ],
+    "html": [
+      "<td id=\"not-published-${product.id}\" translate=\"yes\">Not published yet</td>"
+    ],
+    "text": "Not published yet",
+    "translation": "ಇನ್ನೂ ಪ್ರಕಟವಾಗಿಲ್ಲ"
+  },
+  "Company registration": {
+    "file": [
+      "/src/www/account/connect/stripe-account.html"
+    ],
+    "html": [
+      "<td id=\"business\" translate=\"yes\">Company registration</td>"
+    ],
+    "text": "Company registration",
+    "translation": "ಕಂಪನಿ ನೋಂದಣಿ"
+  },
+  "Beneficial owner": {
+    "file": [
+      "/src/www/account/connect/person.html"
+    ],
+    "html": [
+      "<td id=\"owner\" translate=\"yes\">Beneficial owner</td>"
+    ],
+    "text": "Beneficial owner",
+    "translation": "ಪ್ರಯೋಜನಕಾರಿ ಮಾಲೀಕರು"
+  },
+  "Company director": {
+    "file": [
+      "/src/www/account/connect/person.html"
+    ],
+    "html": [
+      "<td id=\"director\" translate=\"yes\">Company director</td>"
+    ],
+    "text": "Company director",
+    "translation": "ಸಂಸ್ಥೆಯ ನಿರ್ದೇಶಕ"
+  },
+  "Additional information is required about this person": {
+    "file": [
+      "/src/www/account/connect/person.html"
+    ],
+    "html": [
+      "<span translate=\"yes\">Additional information is required about this person</span>"
+    ],
+    "text": "Additional information is required about this person",
+    "translation": "ಈ ವ್ಯಕ್ತಿಯ ಬಗ್ಗೆ ಹೆಚ್ಚುವರಿ ಮಾಹಿತಿ ಅಗತ್ಯವಿದೆ"
   }
 }
