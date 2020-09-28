@@ -15,12 +15,9 @@ module.exports = async (original) => {
     if (!translations[data.text]) {
       translations[data.text] = data
     } else {
-      for (const i in data.file) {
-        if (translations[data.text].file.indexOf(data.file[i]) === -1) {
-          translations[data.text].file.push(data.file[i])
-          translations[data.text].html.push(data.html[i])
-        }
-      }
+      translations[data.text].file = data.file
+      translations[data.text].html = data.html
+      translations[data.text].module = data.module
     }
   }
   const lines = []
@@ -31,10 +28,9 @@ module.exports = async (original) => {
     }
   }
   if (!lines.length) {
-    console.log('no new phrases')
-    return null
+    fs.writeFileSync(`./translations-cache-${locale}.json`, JSON.stringify(translations, null, '  '))
+    return translations
   }
-  console.log('translating', lines.length)
   let retries1 = 0
   let retries2 = 0
   while (true) {
@@ -53,28 +49,25 @@ module.exports = async (original) => {
     }
     chunk.push(formatted)
     originals.push(line)
-    console.log('translating', locale, lines.length, chunk)
     const stdout = await fetch(locale, chunk)
     if (!stdout || !stdout.length) {
       retries1++
       if (retries1 === 20) {
-        console.log('abandoning', locale)
         fs.writeFileSync(`./translations-cache-${locale}.json`, JSON.stringify(translations, null, '  '))
-        return process.exit()
+        return translations
       }
       await wait()
       continue
     } else {
       retries1 = 0
     }
+    console.log('fetching', locale, lines.length)
     const returnedLines = stdout.split('\\n')
     if (returnedLines.length !== chunk.length) {
-      console.log('lines don\'t match', chunk.length + 'vs' + returnedLines.length, 'retries', retries2)
       retries2++
       if (retries2 === 20) {
-        console.log('too many retries', chunk, 'returned', returnedLines)
         fs.writeFileSync(`./translations-cache-${locale}.json`, JSON.stringify(translations, null, '  '))
-        return process.exit()
+        return translations
       }
       await wait()
       continue
@@ -106,9 +99,7 @@ module.exports = async (original) => {
 
 const fetch = util.promisify((locale, chunk, callback) => {
   return childProcess.exec(`trans -brief -e google :${locale} "${chunk.join('\n')}"`, (error, stdout) => {
-    console.log('trans result', error, locale, stdout, chunk)
     if (error) {
-      console.log(error)
       return callback()
     }
     if (!stdout || !stdout.length) {
@@ -119,6 +110,5 @@ const fetch = util.promisify((locale, chunk, callback) => {
 })
 
 const wait = util.promisify((callback) => {
-  console.log('waiting...')
-  return setTimeout(callback, 20000)
+  return setTimeout(callback, 5000)
 })

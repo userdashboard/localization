@@ -7,8 +7,5 @@
 # 2) install 'trans' from https://github.com/soimort/translate-shell
 
 for LOCALE in `cat languages`; do
-  time node localize.js "$LOCALE" `cd .. && pwd`/dashboard
-  time node localize.js "$LOCALE" `cd .. && pwd/organizations
-  time node localize.js "$LOCALE" `cd .. && pwd/stripe-connect
-  time node localize.js "$LOCALE" `cd .. && pwd/stripe-subscriptions
+  time node localize.js "$LOCALE" `cd .. && pwd`
 done
