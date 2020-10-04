@@ -26,6 +26,14 @@
     ],
     "proxy": [
       "/src/proxy/x-language-header.js"
-    ]
+    ],
+    "menus": {
+      "account": [
+
+      ],
+      "administrator": [
+        
+      ]
+    }
   }
 }

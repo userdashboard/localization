@@ -1,5 +1,5 @@
 const dashboard = require('@userdashboard/dashboard')
-const navbar = require('./navbar-account.js')
+const navbar = require('./navbar.js')
 
 module.exports = {
   before: beforeRequest,
