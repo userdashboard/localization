@@ -73,14 +73,14 @@ The translation software expects a folder structure like so:
 
 You can either run the localization software with NodeJS to translate a single language, or the Bash script will translate all languages:
 
-    $ node localize.js es <path-to-somewhere>
+    $ node localize.js es /<path-to-somewhere>
     $ bash localize.sh
 
 If you are translating your own module(s) they may be specified in environment variables:
 
     $ ADD_PROJECT1=your-module \
       ADD_PROJECT2=another-module \
-      node localize.js fr <path-to-somewhere>
+      node localize.js fr /<path-to-somewhere>
 
 First `create-text-manifest.js` scans each `src` folder for HTML files like navigation bars, pages, templates etc and within each file it scans for HTML tags designated `translate="yes"`.  These are cataloged into `text-manifest.json`.
 
