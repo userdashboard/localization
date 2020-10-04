@@ -19,5 +19,13 @@
   "homepage": "https://github.com/userdashboard/localization#readme",
   "dependencies": {
     "server-html": "^9.0.0"
+  },
+  "dashboard": {
+    "server": [
+      "/src/server/apply-language-translation.js"
+    ],
+    "proxy": [
+      "/src/proxy/x-language-header.js"
+    ]
   }
 }
