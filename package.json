@@ -1,6 +1,6 @@
 {
   "name": "@userdashboard/localization",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Localized content for Dashboard and its official modules",
   "main": "apply-translation.js",
   "scripts": {
@@ -28,12 +28,8 @@
       "/src/proxy/x-language-header.js"
     ],
     "menus": {
-      "account": [
-
-      ],
-      "administrator": [
-        
-      ]
+      "account": [],
+      "administrator": []
     }
   }
 }
