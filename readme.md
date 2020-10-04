@@ -1,77 +1,87 @@
-# Localization
+# Documentation for localization 
 
-Dashboard and its modules are localized using [Translate Shell](https://github.com/soimort/translate-shell). 
+#### Index
 
-# How to translate your own module
+- [Introduction](#introduction)
+- [Module contents](#module-contents)
+- [Import this module](#import-this-module)
+- [Adding languages to your application](#adding-supported-languages)
+- [Improving translations](#improving-translations)
+- [How to run the translation software](#translating-your-own-module)
+- [Github repository](https://github.com/userdashboard/localization)
+- [NPM package](https://npmjs.org/userdashboard/localization)
 
-You can generate translations for your own Dashboard module by setting up a copy of Dashboard with it:
 
-    $ git clone https://github.com/userdashboard/dashboard
-    $ git clone https://github.com/userdashboard/localization
-    # set up your module alongside them
-    $ git clone https://github.com/you/your-module
-    $ cd localization
-    $ ADD_PROJECT=your-module bash localize.sh
+# Introduction
 
-# How to make and share a good translation
+Dashboard bundles everything a web app needs, all the "boilerplate" like signing in and changing passwords, into a parallel server so you can write a much smaller packageJSON
 
- Since these are automated translations my expectations are they are not very good.  You can make a perfect translation for any language and publish it as a module.
+At this point if the route is to your application server the `x-language` header will inform you which language is being used.  If the route is to a page on your Dashboard server the translations will be applied automatically.
 
-Firt set up a copy of Dashboard and each of the modules you wish to translate:
+# Module contents 
 
-    $ for x in localization dashboard organizations stripe-connect stripe-subscriptions; do
-        git clone https://github.com/userdashboard/$x.git
-      done;
+Dashboard modules can add pages and API routes.  For more details check the `sitemap.txt` and `api.txt` or `env.txt` also contained in the online documentation.
 
-Second, create a folder for Dashboard:
+| Content type             |     |
+|--------------------------|-----|
+| Proxy scripts            | Yes |
+| Server scripts           | Yes |
+| Content scripts          |     |
+| User pages               | Yes |
+| User API routes          | Yes | 
+| Administrator pages      | Yes |
+| Administrator API routes | Yes | 
 
-    $ mkdir dashboard-LANG
-    $ cd dashboard-LANG
-    $ npm init
-    $ mkdir -p languages
-    $ cp -R ../dashboard/languages/LANG languages
+## Import this module
 
-Also for any modules you are creating translations for:
+Install the module with NPM:
 
-    $ mkdir organizations-LANG
-    $ cd organizations-LANG
-    $ npm init
-    $ mkdir -p languages
-    $ cp -R ../organizations/languages/LANG languages
+    $ npm install @userdashboard/localization
 
-Then edit your copy of the files and when you are finished publish to NPM:
+Edit your `package.json` to activate the module:
 
-    $ cd dashboard-LANG
-    $ npm publish
+    "dashboard": {
+      "modules": [
+        "@userdashboard/localization"
+      ]
+    }
 
-    $ cd organizations-LANG
-    $ npm publish
+# Adding languages to your application
 
-People may use your translations by installing them as modules:
+The owner or an administrator may then activate new languages in the administration system.  Adding a language will allow users to select it from a dropdown:
 
-    $ mkdir my-project
-    $ cd my-project
-    $ npm init
-    $ npm install @userdashboard/dashboard @userdashboard/organizations dashboard-LANG organizations-LANG
-    # edit package.json to activate organizations and -LANG modules
-    $ node main.js
+    ENABLE_LANGUAGE_PREFERENCE=true
+
+Or you may specify it as the default or only language for all users:
+
+    LANGUAGE=fr
+
+# Improving translations
+
+The administration interface allows you to edit translations to correct errors.  If you would like to share your corrected version the administration interface allows you to export the `translations-cache-LANG.json` file, which can be submitted to the [localization repository](https://github.com/userdashboard/localization).
 
 # How to run the translation software
 
-The translation works by setting up a copy of Dashboard and each of the modules:
+Because the translating uses Google Translate the process has been broken up into cache-heavy steps that avoid unnecessary requests to their web service.  The translation software expects a folder structure like so:
 
-    $ for x in localization dashboard organizations stripe-connect stripe-subscriptions; do
-        git clone https://github.com/userdashboard/$x.git
-      done;
-    $ cd localization
+    /<path-to-somewhere>/localization
+    /<path-to-somewhere>/dashboard
+    /<path-to-somewhere>/your-module
+    /<path-to-somewhere>/another-module
+
+You can either run the localization software with NodeJS to translate a single language, or the Bash script will translate all languages:
+
+    $ node localize.js es <path-to-somewhere>
     $ bash localize.sh
 
-Because the translating leans on Google Translate the process has been broken up into cache-heavy steps that avoid unnecessary requests to the web service.
+If you are translating your own module(s) they may be specified in environment variables:
 
-First `create-text-manifest.js` scans each folder for HTML files like navigation bars, pages, templates etc and within each file it scans for tags containing `translate="yes"`.  These are cataloged into `text-manifest.json`.
+    $ ADD_PROJECT1=your-module \
+      ADD_PROJECT2=another-module \
+      node localize.js fr <path-to-somewhere>
 
-Then `translate-text.js` processes the `text-manifest.json` and requests translations for any phrases that are missing a translation.  The translations are cataloged into `translations-cache-LANG.json`.
+First `create-text-manifest.js` scans each `src` folder for HTML files like navigation bars, pages, templates etc and within each file it scans for HTML tags designated `translate="yes"`.  These are cataloged into `text-manifest.json`.
 
-Finally `apply-translation.js` processes a `translation-cache-LANG.json` file and applies the translations to the original HTML file then writes the `/src/LANG/...` equivalent of `/src/www/...`
+Then `translate-text.js` processes the `text-manifest.json` and requests translations for any phrases that aren't translated yet.  The translations are cataloged into `translations-cache-LANG.json`.
 
 The `clean-translation-cache.js` checks the `text-manifest.json` and removes translated phrases that are no longer used.

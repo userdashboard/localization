@@ -65,8 +65,11 @@ function scanElement(module, element, file, addedHTMLTags) {
 
 module.exports = async () => {
   const projects = ['dashboard', 'organizations', 'stripe-subscriptions', 'stripe-connect']
-  if (process.env.ADD_PROJECT) {
-    projects.push(process.env.ADD_PROJECT)
+  let i = 1
+  while (true) {
+    if (process.env[`ADD_PROJECT${i}`]) {
+      projects.push(process.env[`ADD_PROJECT${i}`])
+    }
   }
   for (const project of projects) {
     const files = await scanFiles(project)
