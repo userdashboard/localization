@@ -1,7 +1,7 @@
 {
-  "name": "localization",
+  "name": "@userdashboard/localization",
   "version": "1.0.0",
-  "description": "Dashboard and its modules are localized using [Translate Shell](https://github.com/soimort/translate-shell).  All of the HTML files within '/src' are parsed and any tags with `translate=\"yes\"` are translated.",
+  "description": "Localized content for Dashboard and its official modules",
   "main": "apply-translation.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
