@@ -56,9 +56,13 @@ Or you may specify it as the default or only language for all users:
 
     LANGUAGE=fr
 
+When a language is activated all requests are intercepted with a server script that checks whether the default English content should be swapped out for a transalation.
+
+Your application server can identify a user's language preference via the `x-language` header added by the proxy script.
+
 # Improving translations
 
-The administration interface allows you to edit translations to correct errors.  If you would like to share your corrected version the administration interface allows you to export the `translations-cache-LANG.json` file, which can be submitted via pull-request to the [localization repository](https://github.com/userdashboard/localization).
+The administration interface allows you to edit translations to correct errors.  If you would like to share your corrections the administration interface allows you to download your updated `translations-cache-LANG.json` file, which can be submitted via pull-request to the [localization repository](https://github.com/userdashboard/localization).  Corrected translations are stored in your database so they are accessible to multiple Dashboard server instances.
 
 # How to run the translation software
 
@@ -84,6 +88,6 @@ If you are translating your own module(s) they may be specified in environment v
 
 First `create-text-manifest.js` scans each `src` folder for HTML files like navigation bars, pages, templates etc and within each file it scans for HTML tags designated `translate="yes"`.  These are cataloged into `text-manifest.json`.
 
-Then `translate-text.js` processes the `text-manifest.json` and requests translations for any phrases that aren't translated yet.  The translations are saved into `translations-cache-LANG.json`.
+Second `translate-text.js` processes the `text-manifest.json` and requests translations for any phrases that aren't translated yet.  The translations are saved into `translations-cache-LANG.json`.
 
-The `clean-translation-cache.js` checks the `text-manifest.json` and removes translated phrases that are no longer used.
+Finally `clean-translation-cache.js` checks the `text-manifest.json` and removes translated phrases that are no longer used.
