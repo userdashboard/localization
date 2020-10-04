@@ -32,7 +32,7 @@ Dashboard modules can add pages and API routes.  For more details check the `sit
 | Administrator pages      | Yes |
 | Administrator API routes | Yes | 
 
-## Import this module
+# Import this module
 
 Install the module with NPM:
 
@@ -62,7 +62,9 @@ The administration interface allows you to edit translations to correct errors. 
 
 # How to run the translation software
 
-Because the translating uses Google Translate the process has been broken up into cache-heavy steps that avoid unnecessary requests to their web service.  The translation software expects a folder structure like so:
+You will need to install [Translate Shell](https://github.com/soimort/translate-shell) which is a command-line interface for Google Translate, Bing and Yandex.  Because the translating uses Google Translate the process has been broken up into cache-heavy steps that avoid unnecessary requests to their web service.  
+
+The translation software expects a folder structure like so:
 
     /<path-to-somewhere>/localization
     /<path-to-somewhere>/dashboard
