@@ -84,6 +84,6 @@ If you are translating your own module(s) they may be specified in environment v
 
 First `create-text-manifest.js` scans each `src` folder for HTML files like navigation bars, pages, templates etc and within each file it scans for HTML tags designated `translate="yes"`.  These are cataloged into `text-manifest.json`.
 
-Then `translate-text.js` processes the `text-manifest.json` and requests translations for any phrases that aren't translated yet.  The translations are cataloged into `translations-cache-LANG.json`.
+Then `translate-text.js` processes the `text-manifest.json` and requests translations for any phrases that aren't translated yet.  The translations are saved into `translations-cache-LANG.json`.
 
 The `clean-translation-cache.js` checks the `text-manifest.json` and removes translated phrases that are no longer used.
