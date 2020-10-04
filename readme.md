@@ -58,7 +58,7 @@ Or you may specify it as the default or only language for all users:
 
 # Improving translations
 
-The administration interface allows you to edit translations to correct errors.  If you would like to share your corrected version the administration interface allows you to export the `translations-cache-LANG.json` file, which can be submitted to the [localization repository](https://github.com/userdashboard/localization).
+The administration interface allows you to edit translations to correct errors.  If you would like to share your corrected version the administration interface allows you to export the `translations-cache-LANG.json` file, which can be submitted via pull-request to the [localization repository](https://github.com/userdashboard/localization).
 
 # How to run the translation software
 
