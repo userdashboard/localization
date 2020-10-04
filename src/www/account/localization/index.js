@@ -1,4 +1,4 @@
-const dashboard = require('../../../index.js')
+const dashboard = require('@userdashboard/dashboard')
 const navbar = require('./navbar-account.js')
 
 module.exports = {

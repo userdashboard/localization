@@ -1,4 +1,4 @@
-const dashboard = require('../../../../../../dashboard/index.js')
+const dashboard = require('@userdashboard/dashboard')
 
 module.exports = {
   patch: async (req) => {
