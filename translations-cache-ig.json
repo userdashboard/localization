@@ -5586,7 +5586,7 @@
       "/src/menu-administrator.html"
     ],
     "html": [
-      "<a href=\"/administrator/organizations\" data-module=\"organizations\" translate=\"yes\">Organizations module</a>"
+      "<a href=\"/administrator/organizations\" data-module=\"@userdashboard/organizations\" translate=\"yes\">Organizations module</a>"
     ],
     "text": "Organizations module",
     "translation": "Nhazi ndi otu",
@@ -5643,7 +5643,7 @@
       "/src/www/account/organizations/navbar.html"
     ],
     "html": [
-      "<a href=\"/account/organizations\" data-module=\"organizations\" translate=\"yes\">Manage organizations</a>",
+      "<a href=\"/account/organizations\" data-module=\"@userdashboard/organizations\" translate=\"yes\">Manage organizations</a>",
       "<a href=\"/account/organizations\" translate=\"yes\">Manage organizations</a>",
       "<a href=\"/account/organizations\" translate=\"yes\">Manage organizations</a>",
       "<a href=\"/account/organizations\" translate=\"yes\">Manage organizations</a>",
@@ -12848,7 +12848,7 @@
       "/src/menu-account.html"
     ],
     "html": [
-      "<a href=\"/account/subscriptions\" data-module=\"stripe-subscriptions\" translate=\"yes\">Subscriptions and billing</a>"
+      "<a href=\"/account/subscriptions\" data-module=\"@userdashboard/stripe-subscriptions\" translate=\"yes\">Subscriptions and billing</a>"
     ],
     "text": "Subscriptions and billing",
     "translation": "Ndenye aha na ụgwọ ịgba ụgwọ",
