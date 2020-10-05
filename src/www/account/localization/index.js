@@ -1,5 +1,4 @@
 const dashboard = require('@userdashboard/dashboard')
-const navbar = require('./navbar.js')
 
 module.exports = {
   before: beforeRequest,
@@ -11,18 +10,13 @@ async function beforeRequest (req) {
   if (!global.enableLanguagePreference) {
     throw new Error('language-preference-disabled')
   }
+  const languages = await global.api.user.localization.Languages.get(req)
+  req.data = { languages }
 }
 
-function renderPage (req, res, messageTemplate) {
-  messageTemplate = messageTemplate || (req.query ? req.query.message : null)
+function renderPage (req, res) {
   const doc = dashboard.HTML.parse(req.route.html, null, null, req.language)
-  navbar.setup(doc)
-  if (messageTemplate === 'success') {
-    dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
-  } else if (messageTemplate) {
-    dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
-  }
-  dashboard.HTML.renderList(doc, global.languages, 'language-option', 'language')
+  dashboard.HTML.renderList(doc, req.data.languages, 'language-option', 'language')
   return dashboard.Response.end(req, res, doc)
 }
 
@@ -31,7 +25,7 @@ async function submitForm (req, res) {
     return renderPage(req, res)
   }
   let found = false
-  for (const language of global.languages) {
+  for (const language of req.data.languages) {
     found = language.code === req.body.language
     if (found) {
       break
@@ -43,7 +37,7 @@ async function submitForm (req, res) {
   try {
     req.query = req.query || {}
     req.query.accountid = req.account.accountid
-    await global.api.user.SetAccountLanguage.patch(req)
+    await global.api.user.localization.SetAccountLanguage.patch(req)
   } catch (error) {
     return renderPage(req, res, error.message)
   }

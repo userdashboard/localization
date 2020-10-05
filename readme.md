@@ -16,9 +16,11 @@
 
 # Introduction
 
-Dashboard bundles everything a web app needs, all the "boilerplate" like signing in and changing passwords, into a parallel server so you can write a much smaller packageJSON
+Dashboard bundles everything a web app needs, all the "boilerplate" like signing in and changing passwords, into a parallel server so you can write a much smaller web application.
 
-At this point if the route is to your application server the `x-language` header will inform you which language is being used.  If the route is to a page on your Dashboard server the translations will be applied automatically.
+When you use the localization module you can either specify a language for your application, or allow users to select from a variety of supported languages.  You enable the languages you wish to support, and if you need you can improve the translations too and submit them back to this module on GitHub.
+
+Requests to your Dashboard server will automatically return localized content for the user's preference or the application language.  Requests to your application server will specify the content language in `x-language` header.  When `ENABLE_LANGUAGE_PREFERENCE` is set an account menu option allows users to select from the languages you have enabled.
 
 # Module contents 
 
@@ -28,7 +30,7 @@ Dashboard modules can add pages and API routes.  For more details check the `sit
 |--------------------------|-----|
 | Proxy scripts            | Yes |
 | Server scripts           | Yes |
-| Content scripts          |     |
+| Content scripts          | Yes |
 | User pages               | Yes |
 | User API routes          | Yes | 
 | Administrator pages      | Yes |

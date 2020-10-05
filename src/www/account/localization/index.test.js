@@ -1,9 +1,8 @@
 /* eslint-env mocha */
 const assert = require('assert')
-const { setupBeforeEach } = require('../../../test-helper.js')
 const TestHelper = require('../../../test-helper.js')
 
-describe('/account/language', () => {
+describe('/account/localization', () => {
   let languages
   before(() => {
     languages = global.languages
@@ -23,7 +22,7 @@ describe('/account/language', () => {
   describe('exceptions', () => {
     it('should require language enabled', async () => {
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest('/account/language')
+      const req = TestHelper.createRequest('/account/localization')
       req.account = user.account
       req.session = user.session
       let errorMessage
@@ -40,7 +39,7 @@ describe('/account/language', () => {
     it('should present the form', async () => {
       global.enableLanguagePreference = true
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest('/account/language')
+      const req = TestHelper.createRequest('/account/localization')
       req.account = user.account
       req.session = user.session
       const result = await req.get()
@@ -66,7 +65,7 @@ describe('/account/language', () => {
         global.languages.push({ object: 'language', code: 'es', name: 'Español' })
       }
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest('/account/language')
+      const req = TestHelper.createRequest('/account/localization')
       req.account = user.account
       req.session = user.session
       req.body = {
@@ -76,7 +75,7 @@ describe('/account/language', () => {
       req.screenshots = [
         { hover: '#account-menu-container' },
         { click: '/account' },
-        { click: '/account/language' },
+        { click: '/account/localization' },
         { fill: '#submit-form' }
       ]
       const result = await req.post()
