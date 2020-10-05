@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/localization/navbar.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Localization</title>
+  <link href="/public/pure-min.css" rel="stylesheet">
+  <link href="/public/content.css" rel="stylesheet">
+  <link href="/public/content-additional.css" rel="stylesheet">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Localization</h1>
+  <div id="message-container"></div>
+  <table id="languages-table" class="pure-table pure-table-striped list-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th translate="yes">Name</th>
+        <th translate="yes">Status</th>
+      </tr>
+    </thead>
+  </table>
+  <template id="language-row">
+    <tr id="${language.code}">
+      <td>${language.code}</td>
+      <td>
+        <a href="/administrator/localization/edit-translation?language=${language.code}">${language.name}</a>
+      </td>
+      <td id="active-${language.code}">Active</td>
+      <td id="inactive-${language.code}"></td>
+    </tr>
+  </template>
+</body>
+</html>

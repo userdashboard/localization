@@ -2,7 +2,7 @@
   "name": "@userdashboard/localization",
   "version": "1.0.5",
   "description": "Localized content for Dashboard and its official modules",
-  "main": "apply-translation.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,15 +21,15 @@
     "server-html": "^9.0.0"
   },
   "dashboard": {
+    "title": "Localization module",
+    "content": [
+      "/src/content/remove-language-selection.js"
+    ],
     "server": [
       "/src/server/apply-language-translation.js"
     ],
     "proxy": [
       "/src/proxy/x-language-header.js"
-    ],
-    "menus": {
-      "account": [],
-      "administrator": []
-    }
+    ]
   }
 }

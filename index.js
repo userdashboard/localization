@@ -5,9 +5,6 @@ global.translations = {}
 
 module.exports = {
   setup: async () => {
-    module.exports.langaugeIndex.sort((a, b) => {
-      return a.code.toLowerCase() > b.code.toLowerCase() ? 1 : -1
-    })
     const fs = require('fs')
     let languageList
     if (fs.existsSync(`${global.applicationPath}/languages.json`)) {
@@ -15,6 +12,9 @@ module.exports = {
     } else {
       languageList = require('./languages.json')
     }
+    languageList.sort((a, b) => {
+      return a.code.toLowerCase() > b.code.toLowerCase() ? 1 : -1
+    })
     module.exports.languageList = languageList
     if (process.env.LOCALIZATION_STORAGE) {
       const Storage = require('@userdashboard/dashboard/src/storage.js')
