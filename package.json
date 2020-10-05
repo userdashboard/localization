@@ -1,6 +1,6 @@
 {
   "name": "@userdashboard/localization",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Localized content for Dashboard and its official modules",
   "main": "index.js",
   "scripts": {
