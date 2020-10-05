@@ -8,6 +8,8 @@
 - [Adding languages to your application](#adding-supported-languages)
 - [Improving translations](#improving-translations)
 - [How to run the translation software](#translating-your-own-module)
+- [Storage engine](#storage-engine)
+- [Access the API](#access-the-api)
 - [Github repository](https://github.com/userdashboard/localization)
 - [NPM package](https://npmjs.org/userdashboard/localization)
 
@@ -91,3 +93,51 @@ First `create-text-manifest.js` scans each `src` folder for HTML files like navi
 Second `translate-text.js` processes the `text-manifest.json` and requests translations for any phrases that aren't translated yet.  The translations are saved into `translations-cache-LANG.json`.
 
 Finally `clean-translation-cache.js` checks the `text-manifest.json` and removes translated phrases that are no longer used.
+
+## Storage engine
+
+By default this module will share whatever storage you use for Dashboard.  You can specify an alternate storage module to use instead, or the same module with a separate database.
+
+    SUBSCRIPTIONS_STORAGE=@userdashboard/storage-postgresql
+    SUBSCRIPTIONS_DATABASE_URL=postgres://localhost:5432/subscriptions
+
+### Access the API
+
+Dashboard and official modules are completely API-driven and you can access the same APIs on behalf of the user making requests.  You perform `GET`, `POST`, `PATCH`, and `DELETE` HTTP requests against the API endpoints to fetch or modify data.  This example changes the user's language preference using NodeJS, you can do this with any language:
+
+You can view API documentation within the NodeJS modules' `api.txt` files, or on the [documentation site](https://userdashboard.github.io/localization-api).
+
+    await proxy(`/api/user/localization/set-account-language?accountid=${accountid}`, accountid, sessionid, 'fr')
+
+    const proxy = util.promisify((path, accountid, sessionid, language, callback) => {
+      const postData = `language=${language}`
+        const requestOptions = {
+            host: 'dashboard.example.com',
+            path: path,
+            port: '443',
+            method: 'PATCH',
+            headers: {
+                'x-application-server': 'application.example.com',
+                'x-application-server-token': process.env.APPLICATION_SERVER_TOKEN,
+                'x-accountid': accountid,
+                'x-sessionid': sessionid,
+                'content-length': postData.length,
+                'content-type': 'application/x-www-form-urlencoded'
+            }
+        }
+        const proxyRequest = require('https').request(requestOptions, (proxyResponse) => {
+            let body = ''
+            proxyResponse.on('data', (chunk) => {
+                body += chunk
+            })
+            return proxyResponse.on('end', () => {
+                return callback(null, JSON.parse(body))
+            })
+        })
+        proxyRequest.on('error', (error) => {
+            return callback(error)
+        })
+        proxyRequest.write(postData)
+        return proxyRequest.end(postData)
+      })
+    }

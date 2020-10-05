@@ -1,8 +1,12 @@
+/*
+ * This file would write a /languages/CODE/ folder in Dashboard and each of its modules
+ * containing a copy of all the HTML found in /src/ but this ended up being thousands
+ * of files cluttering the modules now the translations are applied at runtime
+ */
 const childProcess = require('child_process')
 const fs = require('fs')
 const locale = process.argv[2]
 const path = require('path')
-const translationFilePath = path.join(__dirname, `translations-cache-${locale}.json`)
 
 module.exports = async (translation) => {
   console.log('translating', Object.keys(translation))
@@ -22,14 +26,14 @@ module.exports = async (translation) => {
       const file = translation[phrase].file[i]
       const oldHTML = translation[phrase].html[i]
       const module = translation[phrase].module[i]
-      let newText = translation[phrase].translation
+      const newText = translation[phrase].translation
       if (!newText || newText === phrase) {
         continue
       }
       const newHTML = oldHTML.replace(phrase, newText)
       if (newHTML === oldHTML) {
         continue
-      }      
+      }
       const languageSubstitutedPath = file.replace('/src/', `/languages/${locale}/`)
       const languageSubstitutedFile = path.join(process.argv[3], module, languageSubstitutedPath)
       let rawHTML = htmlCache[languageSubstitutedFile]

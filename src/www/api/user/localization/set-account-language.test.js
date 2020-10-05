@@ -2,7 +2,7 @@
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
-describe('/api/user/set-account-language', () => {
+describe('/api/user/localization/set-account-language', () => {
   let languages
   before(() => {
     languages = global.languages

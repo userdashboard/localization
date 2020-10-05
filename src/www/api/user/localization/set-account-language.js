@@ -1,4 +1,4 @@
-const dashboard = require('@userdashboard/dashboard')
+const localization = require('../../../../../index.js')
 
 module.exports = {
   patch: async (req) => {
@@ -14,7 +14,7 @@ module.exports = {
     }
     for (const language of global.languages) {
       if (language.code === req.body.language) {
-        await dashboard.StorageObject.setProperty(`${req.appid}/account/${req.query.accountid}`, 'language', req.body.language)
+        await localization.StorageObject.setProperty(`${req.appid}/account/${req.query.accountid}`, 'language', req.body.language)
         req.account.language = req.body.language
         return req.account
       }

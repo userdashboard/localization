@@ -17,7 +17,7 @@ const scanFiles = util.promisify((folder, callback) => {
   return callback(null, files)
 })
 
-function scanElement(module, element, file, addedHTMLTags) {
+function scanElement (module, element, file, addedHTMLTags) {
   if (element && element.attr && element.attr.translate === 'yes') {
     let text
     if (element.child && element.child.length) {
@@ -65,10 +65,12 @@ function scanElement(module, element, file, addedHTMLTags) {
 
 module.exports = async () => {
   const projects = ['dashboard', 'organizations', 'stripe-subscriptions', 'stripe-connect']
-  let i = 1
+  const i = 1
   while (true) {
     if (process.env[`ADD_PROJECT${i}`]) {
       projects.push(process.env[`ADD_PROJECT${i}`])
+    } else {
+      break
     }
   }
   for (const project of projects) {
