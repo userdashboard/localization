@@ -10,11 +10,11 @@ describe('/api/user/localization/set-account-language', () => {
   beforeEach(() => {
     global.languages = JSON.parse(JSON.stringify(languages))
     for (const language of global.languages) {
-      if (language.code === 'es') {
+      if (language.languageid === 'es') {
         return
       }
     }
-    global.languages.push({ object: 'language', code: 'es', name: 'Español' })
+    global.languages.push({ object: 'language', languageid: 'es', name: 'Español' })
   })
   afterEach(() => {
     global.languages = JSON.parse(JSON.stringify(languages))

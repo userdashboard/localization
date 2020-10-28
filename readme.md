@@ -66,17 +66,17 @@ Your application server can identify a user's language preference via the `x-lan
 
 # Improving translations
 
-The administration interface allows you to edit translations to correct errors.  If you would like to share your corrections the administration interface allows you to download your updated `translations-cache-LANG.json` file, which can be submitted via pull-request to the [localization repository](https://github.com/userdashboard/localization).  Corrected translations are stored in your database so they are accessible to multiple Dashboard server instances.
+The administration interface allows you to edit phrases to correct errors.  Your corrections can be applied to a particular instance of a phrase, or all instances of it.  If you would like to share your corrections the administration interface allows you to download your updated `translations-cache-LANG.json` file, which can be submitted via pull-request to the [localization repository](https://github.com/userdashboard/localization).  Corrections can be stored in your Dashboard database or you can set up independent storage for them.
 
-# How to run the translation software
+# How to update the translation cache
 
 You will need to install [Translate Shell](https://github.com/soimort/translate-shell) which is a command-line interface for Google Translate, Bing and Yandex.  Because the translating uses Google Translate the process has been broken up into cache-heavy steps that avoid unnecessary requests to their web service.  
 
 The translation software expects a folder structure like so:
 
-    /<path-to-somewhere>/localization
     /<path-to-somewhere>/dashboard
-    /<path-to-somewhere>/your-module
+    /<path-to-somewhere>/localization
+    /<path-to-somewhere>/organizations
     /<path-to-somewhere>/another-module
 
 You can either run the localization software with NodeJS to translate a single language, or the Bash script will translate all languages:
@@ -84,10 +84,12 @@ You can either run the localization software with NodeJS to translate a single l
     $ node localize.js es /<path-to-somewhere>
     $ bash localize.sh
 
-If you are translating your own module(s) they may be specified in environment variables:
+Modules being translated can be specified in environment variables:
 
-    $ ADD_PROJECT1=your-module \
-      ADD_PROJECT2=another-module \
+    $ MODULE1=localization \
+      MODULE2=organizations \
+      MODULE3=another-module \
+      MODULE4=... \
       node localize.js fr /<path-to-somewhere>
 
 First `create-text-manifest.js` scans each `src` folder for HTML files like navigation bars, pages, templates etc and within each file it scans for HTML tags designated `translate="yes"`.  These are cataloged into `text-manifest.json`.
@@ -100,8 +102,8 @@ Finally `clean-translation-cache.js` checks the `text-manifest.json` and removes
 
 By default this module will share whatever storage you use for Dashboard.  You can specify an alternate storage module to use instead, or the same module with a separate database.
 
-    SUBSCRIPTIONS_STORAGE=@userdashboard/storage-postgresql
-    SUBSCRIPTIONS_DATABASE_URL=postgres://localhost:5432/subscriptions
+    LOCALIZATION_STORAGE=@userdashboard/storage-postgresql
+    LOCALIZATION_DATABASE_URL=postgres://localhost:5432/localization
 
 ### Access the API
 
@@ -124,7 +126,7 @@ You can view API documentation within the NodeJS modules' `api.txt` files, or on
                 'x-accountid': accountid,
                 'x-sessionid': sessionid,
                 'content-length': postData.length,
-                'content-type': 'application/x-www-form-urlencoded'
+                'content-type': 'application/x-www-form-urlenlanguageidd'
             }
         }
         const proxyRequest = require('https').request(requestOptions, (proxyResponse) => {

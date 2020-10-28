@@ -1,4 +1,5 @@
 <a href="/home"><img src="/public/home.svg" alt="Application home"><span translate="yes">Home</span></a>
 <a href="/administrator/localization" translate="yes">Localization</a>
-<a href="/administrator/localization/edit-translation?language=${language.code}" translate="yes">Edit translation</a>
-<a href="/administrator/localization/remove-language?language=${language.code}" translate="yes">Remove language</a>
+<a href="/administrator/localization/language?languageid=${language.languageid}">${language.name}</a>
+<a id="navbar-inactive" href="/administrator/localization/remove-language?languageid=${language.languageid}" translate="yes">Remove language</a>
+<a href="/administrator/localization/download-translation?languageid=${language.languageid}" translate="yes">Download translation</a>

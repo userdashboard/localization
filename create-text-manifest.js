@@ -64,11 +64,11 @@ function scanElement (module, element, file, addedHTMLTags) {
 }
 
 module.exports = async () => {
-  const projects = ['dashboard', 'organizations', 'stripe-subscriptions', 'stripe-connect']
+  const projects = ['dashboard']
   const i = 1
   while (true) {
-    if (process.env[`ADD_PROJECT${i}`]) {
-      projects.push(process.env[`ADD_PROJECT${i}`])
+    if (process.env[`MODULE${i}`]) {
+      projects.push(process.env[`MODULE${i}`])
     } else {
       break
     }

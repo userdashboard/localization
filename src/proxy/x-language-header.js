@@ -1,3 +1,4 @@
 module.exports = async (req, proxyRequestOptions) => {
-  proxyRequestOptions.headers['x-language'] = req.language || global.language || 'en'
+  const accountLanguage = req.account ? req.account.languageid : null
+  proxyRequestOptions.headers['x-language'] = accountLanguage || global.language || 'en'
 }

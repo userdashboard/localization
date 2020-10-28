@@ -10,11 +10,11 @@ describe('/account/localization', () => {
   beforeEach(() => {
     global.languages = JSON.parse(JSON.stringify(languages))
     for (const language of global.languages) {
-      if (language.code === 'es') {
+      if (language.languageid === 'es') {
         return
       }
     }
-    global.languages.push({ object: 'language', code: 'es', name: 'Español' })
+    global.languages.push({ object: 'language', languageid: 'es', name: 'Español' })
   })
   afterEach(() => {
     global.languages = JSON.parse(JSON.stringify(languages))
@@ -55,14 +55,14 @@ describe('/account/localization', () => {
       const languages = global.languages
       let found = false
       for (const language of languages) {
-        if (language.code === 'es') {
+        if (language.languageid === 'es') {
           found = true
           break
         }
       }
       if (!found) {
         global.languages = JSON.parse(JSON.stringify(languages))
-        global.languages.push({ object: 'language', code: 'es', name: 'Español' })
+        global.languages.push({ object: 'language', languageid: 'es', name: 'Español' })
       }
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/account/localization')

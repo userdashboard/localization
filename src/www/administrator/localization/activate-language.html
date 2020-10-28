@@ -1,18 +1,18 @@
 i<!DOCTYPE html>
-<html lang="en" data-navbar="/administrator/localization/navbar.html">
+<html lang="en" data-navbar="/administrator/localization/navbar-language.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Add language</title>
+  <title translate="yes">Activate language</title>
   <link href="/public/pure-min.css" rel="stylesheet">
   <link href="/public/content.css" rel="stylesheet">
   <link href="/public/content-additional.css" rel="stylesheet">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Add language</h1>
-  <p translate="yes">Activating this language will make it available for user preference and default language.</p>
+  <h1 translate="yes">Activate language</h1>
+  <p translate="yes">This will make the language available for user preference and/or application default language.</p>
   <div id="message-container"></div>
-  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/localization/add-language" name="submit-form">
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/localization/activate-language?languageid=${language.languageid}" name="submit-form">
     <fieldset>
       <div class="pure-controls">
         <button id="submit-button" type="submit" class="pure-button pure-button-primary" translate="yes">Activate language</button>

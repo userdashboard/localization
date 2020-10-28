@@ -1,7 +1,5 @@
 global.enableLanguagePreference = process.env.ENABLE_LANGUAGE_PREFERENCE || false
 global.language = process.env.LANGUAGE || 'en'
-global.languages = []
-global.translations = {}
 
 module.exports = {
   setup: async () => {
@@ -13,7 +11,7 @@ module.exports = {
       languageList = require('./languages.json')
     }
     languageList.sort((a, b) => {
-      return a.code.toLowerCase() > b.code.toLowerCase() ? 1 : -1
+      return a.languageid.toLowerCase() > b.languageid.toLowerCase() ? 1 : -1
     })
     module.exports.languageList = languageList
     if (process.env.LOCALIZATION_STORAGE) {
@@ -31,15 +29,6 @@ module.exports = {
       module.exports.Storage = dashboard.Storage
       module.exports.StorageList = dashboard.StorageList
       module.exports.StorageObject = dashboard.StorageObject
-    }
-    const languages = await module.exports.StorageList.listAll('activeLanguages')
-    if (languages && languages.length) {
-      for (const object of languageList) {
-        if (languages.indexOf(object.code) > -1) {
-          global.languages.push(object)
-          global.translations[object.code] = require(`./translation-cache-${object.code}.json`)
-        }
-      }
     }
   }
 }

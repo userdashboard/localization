@@ -2,6 +2,7 @@ const localization = require('../../../../../index.js')
 
 module.exports = {
   patch: async (req) => {
+    console.log(1)
     if (!req.query || !req.query.accountid) {
       throw new Error('invalid-accountid')
     }
@@ -9,13 +10,15 @@ module.exports = {
     if (!account) {
       throw new Error('invalid-accountid')
     }
-    if (!req.body || !req.body.language) {
-      throw new Error('invalid-language')
+    if (!req.body || !req.body.languageid) {
+      throw new Error('invalid-languageid')
     }
-    for (const language of global.languages) {
-      if (language.code === req.body.language) {
-        await localization.StorageObject.setProperty(`${req.appid}/account/${req.query.accountid}`, 'language', req.body.language)
-        req.account.language = req.body.language
+    const activeLanguages = await global.api.user.localization.Languages.get(req)
+    console.log('checking', req.account)
+    for (const language of activeLanguages) {
+      if (language.languageid === req.body.languageid) {
+        await localization.StorageObject.setProperty(`${req.appid}/account/${req.query.accountid}`, 'languageid', req.body.languageid)
+        req.account.languageid = req.body.languageid
         return req.account
       }
     }

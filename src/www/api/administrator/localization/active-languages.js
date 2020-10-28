@@ -1,9 +1,16 @@
 const localization = require('../../../../../index.js')
 
-let cached
 module.exports = {
-  get: async (req) => {
-    cached = cached || JSON.stringify(localization.languages)
-    return JSON.parse(cached)
+  get: async () => {
+    const languages = await localization.StorageList.listAll('activeLanguages')
+    const active = []
+    if (languages && languages.length) {
+      for (const object of localization.languageList) {
+        if (languages.indexOf(object.languageid) > -1) {
+          active.push(object)
+        }
+      }
+    }
+    return active
   }
 }
