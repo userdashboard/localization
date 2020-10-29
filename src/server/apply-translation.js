@@ -72,8 +72,6 @@ function applyTranslation (translation, url, html) {
       const correction = data.corrections ? data.corrections[i] : null
       const newTag = tag.replace(phrase, correction || data.translation)
       html = html.replace(tag, newTag)
-      console.log('replacing tag', tag, newTag)
-      console.log('found match', url, data.file[i])
     }
   }
   return html

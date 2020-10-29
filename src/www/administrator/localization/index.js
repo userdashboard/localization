@@ -5,7 +5,7 @@ module.exports = {
   get: renderPage
 }
 
-async function beforeRequest(req) {
+async function beforeRequest (req) {
   const languages = await global.api.administrator.localization.AllLanguages.get(req)
   const activeLanguages = await global.api.administrator.localization.ActiveLanguages.get(req)
   for (const language of languages) {
@@ -19,8 +19,8 @@ async function beforeRequest(req) {
   req.data = { languages }
 }
 
-function renderPage(req, res) {
-  const doc = dashboard.HTML.parse(req.html || req.route.html, null, null, req.language)
+function renderPage (req, res) {
+  const doc = dashboard.HTML.parse(req.html || req.route.html, null, nulldashboard.HML.parse(req.html || req.route.html, $1, $2, req.navbarHTML))
   dashboard.HTML.renderTable(doc, req.data.languages, 'language-row', 'languages-table')
   const removeElements = []
   for (const language of req.data.languages) {

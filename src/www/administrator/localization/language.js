@@ -6,7 +6,7 @@ module.exports = {
   get: renderPage
 }
 
-async function beforeRequest(req) {
+async function beforeRequest (req) {
   if (!req.query || !req.query.languageid) {
     throw new Error('invalid-languageid')
   }
@@ -22,7 +22,7 @@ async function beforeRequest(req) {
   req.data = { language, phrases }
 }
 
-async function renderPage(req, res) {
+async function renderPage (req, res) {
   const doc = dashboard.HTML.parse(req.html || req.route.html, req.data.language, 'language', req.language)
   navbar.setup(doc, req.data.language)
   const removeElements = []

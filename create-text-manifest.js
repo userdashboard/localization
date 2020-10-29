@@ -65,10 +65,11 @@ function scanElement (module, element, file, addedHTMLTags) {
 
 module.exports = async () => {
   const projects = ['dashboard']
-  const i = 1
+  let i = 1
   while (true) {
     if (process.env[`MODULE${i}`]) {
       projects.push(process.env[`MODULE${i}`])
+      i++
     } else {
       break
     }
