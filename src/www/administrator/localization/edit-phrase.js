@@ -7,7 +7,7 @@ module.exports = {
   post: submitForm
 }
 
-async function beforeRequest(req) {
+async function beforeRequest (req) {
   if (!req.query || !req.query.languageid) {
     throw new Error('invalid-languageid')
   }
@@ -57,14 +57,14 @@ async function beforeRequest(req) {
   req.data = { language, phrase, instances }
 }
 
-async function renderPage(req, res) {
+async function renderPage (req, res) {
   const doc = dashboard.HTML.parse(req.html || req.route.html, req.data.language, 'language', req.language)
   navbar.setup(doc, req.data.language)
   dashboard.HTML.renderTable(doc, req.data.instances, 'instance-row', 'instances-table')
   return dashboard.Response.end(req, res, doc)
 }
 
-async function submitForm(req, res) {
+async function submitForm (req, res) {
   if (req.query && req.query.message === 'success') {
     return renderPage(req, res)
   }
@@ -83,7 +83,7 @@ async function submitForm(req, res) {
   }
 }
 
-function encodeHTML(str) {
+function encodeHTML (str) {
   str = str.replace(' translate="yes"', '')
   return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 }

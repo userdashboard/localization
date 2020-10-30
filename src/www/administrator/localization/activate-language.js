@@ -7,7 +7,7 @@ module.exports = {
   post: submitForm
 }
 
-async function beforeRequest(req) {
+async function beforeRequest (req) {
   if (!req.query || !req.query.languageid) {
     throw new Error('invalid-languageid')
   }
@@ -15,7 +15,7 @@ async function beforeRequest(req) {
   req.data = { language }
 }
 
-async function renderPage(req, res, messageTemplate) {
+async function renderPage (req, res, messageTemplate) {
   console.log(3)
   messageTemplate = messageTemplate || (req.query ? req.query.message : null)
   console.log(messageTemplate)
@@ -32,7 +32,7 @@ async function renderPage(req, res, messageTemplate) {
   return dashboard.Response.end(req, res, doc)
 }
 
-async function submitForm(req, res) {
+async function submitForm (req, res) {
   if (req.query && req.query.message === 'success') {
     return renderPage(req, res)
   }

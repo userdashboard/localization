@@ -20,7 +20,7 @@ async function beforeRequest (req) {
 }
 
 function renderPage (req, res) {
-  const doc = dashboard.HTML.parse(req.html || req.route.html, null, nulldashboard.HML.parse(req.html || req.route.html, $1, $2, req.navbarHTML))
+  const doc = dashboard.HTML.parse(req.html || req.route.html)
   dashboard.HTML.renderTable(doc, req.data.languages, 'language-row', 'languages-table')
   const removeElements = []
   for (const language of req.data.languages) {

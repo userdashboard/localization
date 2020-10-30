@@ -6,7 +6,7 @@ module.exports = {
   post: submitForm
 }
 
-async function beforeRequest(req) {
+async function beforeRequest (req) {
   if (!global.enableLanguagePreference) {
     throw new Error('language-preference-disabled')
   }
@@ -14,9 +14,9 @@ async function beforeRequest(req) {
   req.data = { languages }
 }
 
-function renderPage(req, res, messageTemplate) {
+function renderPage (req, res, messageTemplate) {
   messageTemplate = messageTemplate || (req.query ? req.query.message : null)
-  const doc = dashboard.HTML.parse(req.html || req.route.html, null, nulldashboard.HML.parse(req.html || req.route.html, $1, $2, req.navbarHTML))
+  const doc = dashboard.HTML.parse(req.html || req.route.html)
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
   }
@@ -24,7 +24,7 @@ function renderPage(req, res, messageTemplate) {
   return dashboard.Response.end(req, res, doc)
 }
 
-async function submitForm(req, res) {
+async function submitForm (req, res) {
   if (!req.body || !req.body.languageid) {
     return renderPage(req, res)
   }
