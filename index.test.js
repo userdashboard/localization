@@ -1,9 +1,8 @@
 /* eslint-env mocha */
-require('./test-helper.js')
 const assert = require('assert')
 const properties = [
   { camelCase: 'language', raw: 'LANGUAGE', description: 'Default language', value: 'fr', default: 'en', valueDescription: 'String' },
-  { camelCase: 'enableLanguagePreference', raw: 'ENABLE_LANGUAGE_PREFERENCE', description: 'Enable user language selection', value: 'true', default: 'false', valueDescription: 'Boolean' }
+  { camelCase: 'enableLanguagePreference', raw: 'ENABLE_LANGUAGE_PREFERENCE', description: 'Enable user language selection', value: 'true', noDefaultValue: true, valueDescription: 'Boolean' }
 ]
 
 describe('index', () => {

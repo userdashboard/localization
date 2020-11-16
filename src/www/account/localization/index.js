@@ -11,6 +11,7 @@ async function beforeRequest (req) {
     throw new Error('language-preference-disabled')
   }
   const languages = await global.api.user.localization.Languages.get(req)
+  console.log(languages)
   req.data = { languages }
 }
 
@@ -20,7 +21,9 @@ function renderPage (req, res, messageTemplate) {
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
   }
-  dashboard.HTML.renderList(doc, req.data.languages, 'language-option', 'languageid')
+  if (req.data.languages && req.data.languages.length) {
+    dashboard.HTML.renderList(doc, req.data.languages, 'language-option', 'languageid')
+  }
   return dashboard.Response.end(req, res, doc)
 }
 
@@ -36,7 +39,7 @@ async function submitForm (req, res) {
     }
   }
   if (!found) {
-    return renderPage(req, res, 'invalid-language')
+    return renderPage(req, res, 'invalid-languageid')
   }
   try {
     req.query = req.query || {}

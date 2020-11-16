@@ -15,7 +15,9 @@ module.exports = {
     }
     const activeLanguages = await global.api.user.localization.Languages.get(req)
     console.log('checking', req.account)
+    console.log('active languages', activeLanguages)
     for (const language of activeLanguages) {
+      console.log(language)
       if (language.languageid === req.body.languageid) {
         await localization.StorageObject.setProperty(`${req.appid}/account/${req.query.accountid}`, 'languageid', req.body.languageid)
         req.account.languageid = req.body.languageid

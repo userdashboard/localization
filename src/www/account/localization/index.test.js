@@ -1,26 +1,12 @@
 /* eslint-env mocha */
 const assert = require('assert')
-const TestHelper = require('../../../test-helper.js')
+const { copyFileSync } = require('fs')
+const TestHelper = require('../../../../test-helper.js')
 
 describe('/account/localization', () => {
-  let languages
-  before(() => {
-    languages = global.languages
-  })
-  beforeEach(() => {
-    global.languages = JSON.parse(JSON.stringify(languages))
-    for (const language of global.languages) {
-      if (language.languageid === 'es') {
-        return
-      }
-    }
-    global.languages.push({ object: 'language', languageid: 'es', name: 'Español' })
-  })
-  afterEach(() => {
-    global.languages = JSON.parse(JSON.stringify(languages))
-  })
   describe('exceptions', () => {
     it('should require language enabled', async () => {
+      global.enableLanguagePreference = false
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/account/localization')
       req.account = user.account
@@ -38,11 +24,15 @@ describe('/account/localization', () => {
   describe('view', () => {
     it('should present the form', async () => {
       global.enableLanguagePreference = true
+      const administrator = await TestHelper.createOwner()
+      await TestHelper.setLanguageActive(administrator, 'fr')
+      await TestHelper.setLanguageActive(administrator, 'it')
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/account/localization')
       req.account = user.account
       req.session = user.session
       const result = await req.get()
+      console.log(result)
       const doc = TestHelper.extractDoc(result.html)
       assert.strictEqual(doc.getElementById('submit-form').tag, 'form')
       assert.strictEqual(doc.getElementById('submit-button').tag, 'button')
@@ -52,29 +42,19 @@ describe('/account/localization', () => {
   describe('submit', () => {
     it('should change the language (screenshots)', async () => {
       global.enableLanguagePreference = true
-      const languages = global.languages
-      let found = false
-      for (const language of languages) {
-        if (language.languageid === 'es') {
-          found = true
-          break
-        }
-      }
-      if (!found) {
-        global.languages = JSON.parse(JSON.stringify(languages))
-        global.languages.push({ object: 'language', languageid: 'es', name: 'Español' })
-      }
+      const administrator = await TestHelper.createOwner()
+      await TestHelper.setLanguageActive(administrator, 'fr')
+      await TestHelper.setLanguageActive(administrator, 'it')
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/account/localization')
       req.account = user.account
       req.session = user.session
       req.body = {
-        language: 'es'
+        languageid: 'it'
       }
       req.filename = __filename
       req.screenshots = [
         { hover: '#account-menu-container' },
-        { click: '/account' },
         { click: '/account/localization' },
         { fill: '#submit-form' }
       ]
@@ -83,7 +63,6 @@ describe('/account/localization', () => {
       const messageContainer = doc.getElementById('message-container')
       const message = messageContainer.child[0]
       assert.strictEqual(message.attr.template, 'success')
-      global.languages = JSON.parse(JSON.stringify(languages))
     })
   })
 })
