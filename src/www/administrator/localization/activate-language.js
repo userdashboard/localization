@@ -16,9 +16,7 @@ async function beforeRequest (req) {
 }
 
 async function renderPage (req, res, messageTemplate) {
-  console.log(3)
   messageTemplate = messageTemplate || (req.query ? req.query.message : null)
-  console.log(messageTemplate)
   const doc = dashboard.HTML.parse(req.html || req.route.html, req.data.language, 'language', req.language)
   navbar.setup(doc, req.data.language)
   if (messageTemplate) {
@@ -33,7 +31,7 @@ async function renderPage (req, res, messageTemplate) {
 }
 
 async function submitForm (req, res) {
-  if (req.query && req.query.message === 'success') {
+  if (req.query.message === 'success') {
     return renderPage(req, res)
   }
   try {

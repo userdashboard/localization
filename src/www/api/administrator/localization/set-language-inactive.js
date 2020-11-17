@@ -16,7 +16,7 @@ module.exports = {
       throw new Error('invalid-languageid')
     }
     const languages = await localization.StorageList.listAll('activeLanguages')
-    if (languages && languages.length && languages.indexOf(req.query.languageid) === -1) {
+    if (!languages || !languages.length || languages.indexOf(req.query.languageid) === -1) {
       throw new Error('invalid-language')
     }
     await localization.StorageList.remove('activeLanguages', req.query.languageid)

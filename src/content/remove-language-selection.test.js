@@ -7,7 +7,7 @@ const dashboard = require('@userdashboard/dashboard')
 describe('content/remove-language-selection', () => {
   describe('template', () => {
     it('should remove language option by default', async () => {
-      delete(global.enableLanguagePreference)
+      delete (global.enableLanguagePreference)
       const user = await TestHelper.createUser()
       const req = TestHelper.createRequest('/account')
       req.account = user.account
@@ -40,6 +40,6 @@ describe('content/remove-language-selection', () => {
       const templateDoc = dashboard.HTML.parse(response.html)
       await RemoveLanguageSelection.template(req, req, templateDoc)
       assert.strictEqual(templateDoc.toString().indexOf('/account/localization') > -1, true)
-      })
+    })
   })
 })

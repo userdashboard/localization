@@ -1,6 +1,5 @@
 /* eslint-env mocha */
 const assert = require('assert')
-const { copyFileSync } = require('fs')
 const TestHelper = require('../../../../test-helper.js')
 
 describe('/account/localization', () => {
