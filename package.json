@@ -20,7 +20,8 @@
   "dashboard": {
     "title": "Localization module",
     "content": [
-      "/src/content/remove-language-selection.js"
+      "/src/content/remove-language-selection.js",
+      "/src/content/set-html-language-attribute.js"
     ],
     "server": [
       "/src/server/apply-translation.js"

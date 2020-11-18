@@ -11,10 +11,10 @@
   <body>
     <h1 translate="yes">Edit phrase "${language.textTrimmed}"</h1>
     <div id="message-container"></div>
-    <form method="post" action="/administrator/localization/edit-phrase?text=${language.text}&languageid=${language.languageid}" class="pure-form pure-form-stacked">
+    <form id="submit-form" method="post" action="/administrator/localization/edit-phrase?text=${language.text}&languageid=${language.languageid}" class="pure-form pure-form-stacked">
       <div class="pure-control-group">
         <label for="correction" translate="yes">Correction</label>
-        <input value="${language.translation}" name="correction" type="text" maxlength="1000" class="pure-input pure-input-1-2">
+        <input value="${language.translation}" name="correction" type="text" maxlength="1000" class="pure-input pure-input-1-2" />
       </div>
       <div class="pure-control-group">
         <h2>Apply correction to phrases</h2>
@@ -35,11 +35,11 @@
     </form>
   </body>
   <template id="instance-row">
-    <tr id="instance-${instance.id}">
+    <tr>
       <td>
         <div class="pure-checkbox">
           <label for="instance-${instance.id}">
-            <input type="checkbox" name="instance-${instance.id}"> 
+            <input type="checkbox" name="instance-${instance.id}" id="instance-${instance.id}" /> 
           </label>
         </div>
       </td>
@@ -49,5 +49,20 @@
       <td>${instance.file}</td>
       <td>${instance.correction}</td>
     </tr>
+  </template>
+  <template id="success">
+    <div class="success message" translate="yes">
+      Success! The correction has been updated
+    </div>
+  </template>
+  <template id="invalid-language">
+    <div class="error message" translate="yes">
+      Error! An invalid language was selected
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      Error! An unknown error occurred
+    </div>
   </template>
 </html>

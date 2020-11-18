@@ -31,7 +31,7 @@ async function beforeRequest (req) {
     throw new Error('invalid-text')
   }
   const instances = []
-  phrase.correction = phrase.correction || []
+  phrase.corrections = phrase.corrections || []
   language.text = req.query.text
   language.translation = phrase.translation
   language.textTrimmed = language.text.length > 50 ? language.text.substring(0, 40) + '...' : language.text
@@ -43,7 +43,7 @@ async function beforeRequest (req) {
       fileTrimmed: phrase.file[i].substring('/src/www'.length, phrase.file[i].length - '.html'.length),
       module: phrase.module[i],
       html: encodeHTML(encodeHTML(phrase.html[i])),
-      correction: phrase.correction[i] || ''
+      correction: phrase.corrections[i] || ''
     }
     if (instances[i].html.length > 80) {
       instances[i].htmlTrimmed = instances[i].html.substring(0, 70) + '...'
@@ -55,11 +55,22 @@ async function beforeRequest (req) {
     }
   }
   req.data = { language, phrase, instances }
+  console.log('setting up form data', req.data)
 }
 
-async function renderPage (req, res) {
+async function renderPage (req, res, messageTemplate) {
+  messageTemplate = messageTemplate || (req.query ? req.query.message : null)
   const doc = dashboard.HTML.parse(req.html || req.route.html, req.data.language, 'language', req.language)
   navbar.setup(doc, req.data.language)
+  if (messageTemplate) {
+    dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
+    if (messageTemplate === 'success') {
+      const submitForm = doc.getElementById('submit-form')
+      submitForm.parentNode.removeChild(submitForm)
+    }
+    console.log('ended with message template', messageTemplate)
+    return dashboard.Response.end(req, res, doc)
+  }
   dashboard.HTML.renderTable(doc, req.data.instances, 'instance-row', 'instances-table')
   return dashboard.Response.end(req, res, doc)
 }

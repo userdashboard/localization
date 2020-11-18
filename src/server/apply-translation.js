@@ -3,7 +3,6 @@ const path = require('path')
 
 module.exports = {
   after: async (req) => {
-    console.log('checming alnguage')
     let language
     if (global.enableLanguagePreference) {
       language = req.account ? req.account.languageid : null

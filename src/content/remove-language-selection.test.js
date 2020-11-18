@@ -14,7 +14,7 @@ describe('content/remove-language-selection', () => {
       req.session = user.session
       const response = await req.get()
       const templateDoc = dashboard.HTML.parse(response.html)
-      await RemoveLanguageSelection.template(req, req, templateDoc)
+      await RemoveLanguageSelection.template(req, {}, templateDoc)
       assert.strictEqual(templateDoc.toString().indexOf('/account/localization'), -1)
     })
 
@@ -26,7 +26,7 @@ describe('content/remove-language-selection', () => {
       req.session = user.session
       const response = await req.get()
       const templateDoc = dashboard.HTML.parse(response.html)
-      await RemoveLanguageSelection.template(req, req, templateDoc)
+      await RemoveLanguageSelection.template(req, {}, templateDoc)
       assert.strictEqual(templateDoc.toString().indexOf('/account/localization'), -1)
     })
 
@@ -38,7 +38,7 @@ describe('content/remove-language-selection', () => {
       req.session = user.session
       const response = await req.get()
       const templateDoc = dashboard.HTML.parse(response.html)
-      await RemoveLanguageSelection.template(req, req, templateDoc)
+      await RemoveLanguageSelection.template(req, {}, templateDoc)
       assert.strictEqual(templateDoc.toString().indexOf('/account/localization') > -1, true)
     })
   })

@@ -28,7 +28,7 @@ describe('/administrator/localization/activate-language', () => {
   })
 
   describe('submit', () => {
-    it.only('should apply account update (screenshots)', async () => {
+    it('should activate language (screenshots)', async () => {
       const administrator = await TestHelper.createOwner()
       const req = TestHelper.createRequest('/administrator/localization/activate-language?languageid=fr')
       req.account = administrator.account

@@ -6,7 +6,7 @@ describe('/administrator/localization/edit-phrase', () => {
   describe('before', () => {
     it('should bind data to req', async () => {
       const administrator = await TestHelper.createOwner()
-      const req = TestHelper.createRequest('/administrator/localization/edit-phrase?languageid=fr')
+      const req = TestHelper.createRequest('/administrator/localization/edit-phrase?languageid=fr&text=Account')
       req.account = administrator.account
       req.session = administrator.session
       await req.route.api.before(req)
@@ -17,10 +17,11 @@ describe('/administrator/localization/edit-phrase', () => {
   describe('view', () => {
     it('should present the form', async () => {
       const administrator = await TestHelper.createOwner()
-      const req = TestHelper.createRequest('/administrator/localization/edit-phrase?languageid=fr')
+      const req = TestHelper.createRequest('/administrator/localization/edit-phrase?languageid=fr&text=Account')
       req.account = administrator.account
       req.session = administrator.session
       const result = await req.get()
+      console.log(result)
       const doc = TestHelper.extractDoc(result.html)
       assert.strictEqual(doc.getElementById('submit-form').tag, 'form')
       assert.strictEqual(doc.getElementById('submit-button').tag, 'button')
@@ -30,16 +31,20 @@ describe('/administrator/localization/edit-phrase', () => {
   describe('submit', () => {
     it('should create phrase corrections (screenshots)', async () => {
       const administrator = await TestHelper.createOwner()
-      const req = TestHelper.createRequest('/administrator/localization/edit-phrase?languageid=fr')
+      const req = TestHelper.createRequest('/administrator/localization/edit-phrase?languageid=fr&text=Account')
       req.account = administrator.account
       req.session = administrator.session
       req.filename = __filename
+      req.body = {
+        correction: 'test',
+        'instance-1': true,
+        'instance-2': false
+      }
       req.screenshots = [
         { hover: '#administrator-menu-container' },
-        { click: '/administrator' },
         { click: '/administrator/localization' },
         { click: '/administrator/localization/language?languageid=fr' },
-        { click: '/administrator/localization/edit-phrase?languageid=fr&text=Account' },
+        { click: '/administrator/localization/edit-phrase?text=Account&languageid=fr' },
         { fill: '#submit-form' }
       ]
       const result = await req.post()
@@ -47,31 +52,6 @@ describe('/administrator/localization/edit-phrase', () => {
       const messageContainer = doc.getElementById('message-container')
       const message = messageContainer.child[0]
       assert.strictEqual(message.attr.template, 'success')
-    })
-  })
-
-  describe('errors', () => {
-    it('invalid-languageid', async () => {
-      const administrator = await TestHelper.createOwner()
-      const req = TestHelper.createRequest('/administrator/localization/edit-phrase?languageid=invalid')
-      req.account = administrator.account
-      req.session = administrator.session
-      const result = await req.post()
-      const doc = TestHelper.extractDoc(result.html)
-      const message = doc.getElementById('message-container').child[0]
-      assert.strictEqual(message.attr.template, 'invalid-languageid')
-    })
-
-    it('invalid-text', async () => {
-      const administrator = await TestHelper.createOwner()
-      await TestHelper.setLanguageActive(administrator, 'fr')
-      const req = TestHelper.createRequest('/administrator/localization/edit-phrase?languageid=fr&text=Account')
-      req.account = administrator.account
-      req.session = administrator.session
-      const result = await req.post()
-      const doc = TestHelper.extractDoc(result.html)
-      const message = doc.getElementById('message-container').child[0]
-      assert.strictEqual(message.attr.template, 'invalid-languageid')
     })
   })
 })
