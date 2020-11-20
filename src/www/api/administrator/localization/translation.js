@@ -10,6 +10,7 @@ module.exports = {
         continue
       }
       const translation = require(`../../../../../translations-cache-${req.query.languageid}`)
+      translation.object = 'translation'
       const correctionsRaw = await localization.Storage.read(`corrections/${req.query.languageid}`)
       if (!correctionsRaw || !correctionsRaw.length) {
         return translation

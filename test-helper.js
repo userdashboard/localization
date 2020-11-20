@@ -20,7 +20,6 @@ module.exports.setLanguageActive = setLanguageActive
 module.exports.setLanguageInactive = setLanguageInactive
 
 async function setUserLanguage (user, languageid) {
-  console.log('setting user language', user.account.accountid, languageid)
   const req = TestHelper.createRequest(`/api/user/localization/set-account-language?accountid=${user.account.accountid}`)
   req.account = user.account
   req.session = user.session

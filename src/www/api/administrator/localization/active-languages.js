@@ -1,16 +1,29 @@
 const localization = require('../../../../../index.js')
 
 module.exports = {
-  get: async () => {
-    const languages = await localization.StorageList.listAll('activeLanguages')
-    const active = []
-    if (languages && languages.length) {
-      for (const object of localization.languageList) {
-        if (languages.indexOf(object.languageid) > -1) {
-          active.push(object)
-        }
-      }
+  get: async (req) => {
+    req.query = req.query || {}
+    const storage = req.storage || localization
+    let languageids
+    if (req.query.all) {
+      console.log('all', true)
+      languageids = await storage.StorageList.listAll(`${req.appid}/activeLanguages`)
+    } else {
+      const offset = req.query.offset ? parseInt(req.query.offset, 10) : 0
+      const limit = req.query.limit ? parseInt(req.query.limit, 10) : global.pageSize
+      console.log('offset', offset)
+      console.log('limit', limit)
+      languageids = await storage.StorageList.list(`${req.appid}/activeLanguages`, offset, limit)
     }
-    return active
+    if (!languageids || !languageids.length) {
+      return null
+    }
+    const languages = []
+    for (const languageid of languageids) {
+      req.query.languageid = languageid
+      const language = await global.api.administrator.localization.Language.get(req)
+      languages.push(language)
+    }
+    return languages
   }
 }

@@ -110,6 +110,23 @@ describe('/api/user/localization/set-account-language', () => {
         }
         assert.strictEqual(errorMessage, 'invalid-language')
       })
+
+      it('inactive posted language', async () => {
+        const user = await TestHelper.createUser()
+        const req = TestHelper.createRequest(`/api/user/set-account-language?accountid=${user.account.accountid}`)
+        req.account = user.account
+        req.session = user.session
+        req.body = {
+          language: 'fr'
+        }
+        let errorMessage
+        try {
+          await req.patch(req)
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-language')
+      })
     })
   })
 

@@ -2,7 +2,7 @@
 const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
-describe('/administrator/localization/../remove-language', () => {
+describe('/administrator/localization/remove-language', () => {
   describe('before', () => {
     it('should bind data to req', async () => {
       const administrator = await TestHelper.createOwner()
@@ -30,7 +30,7 @@ describe('/administrator/localization/../remove-language', () => {
   })
 
   describe('submit', () => {
-    it('should apply account update (screenshots)', async () => {
+    it('should remove language (screenshots)', async () => {
       const administrator = await TestHelper.createOwner()
       await TestHelper.setLanguageActive(administrator, 'fr')
       const req = TestHelper.createRequest('/administrator/localization/remove-language?languageid=fr')
