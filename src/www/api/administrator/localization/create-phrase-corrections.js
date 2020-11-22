@@ -33,9 +33,7 @@ module.exports = {
       corrections[req.query.text][i] = correction || ''
       i++
     }
-    console.log('writing corrections', corrections, phrase)
     const object = await localization.Storage.write(`corrections/${req.query.languageid}`, corrections)
-    console.log('the object', object)
     return object
   }
 }

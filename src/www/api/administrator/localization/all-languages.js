@@ -14,9 +14,7 @@ module.exports = {
       }
       return languages
     }
-    console.log('fetching', req.url, offset, limit)
     for (const i in localization.languageList) {
-      console.log('offset', offset, 'i', i)
       if (i < offset) {
         continue
       }

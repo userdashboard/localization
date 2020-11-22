@@ -44,7 +44,6 @@ module.exports = {
           const navbarHTML = fs.readFileSync(navbarPath).toString()
           if (navbarHTML) {
             const html = applyTranslation(translation, navbarPath.substring(navbarPath.indexOf('/src')), navbarHTML)
-            console.log('translated navbar', html)
             req.html = req.html.replace('data-navbar', 'localized-navbar')
             req.html = req.html.replace('</head>', `<template id="navbar">${html}</template>`)
           }
@@ -56,7 +55,6 @@ module.exports = {
 }
 
 function applyTranslation (translation, url, html) {
-  console.log('applying translation', url)
   for (const phrase in translation) {
     const data = translation[phrase]
     if (!data.file || !data.file.length) {

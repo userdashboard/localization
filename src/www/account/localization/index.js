@@ -11,7 +11,6 @@ async function beforeRequest (req) {
     throw new Error('language-preference-disabled')
   }
   const languages = await global.api.user.localization.Languages.get(req)
-  console.log(languages)
   req.data = { languages }
 }
 
@@ -44,7 +43,6 @@ async function submitForm (req, res) {
   try {
     req.query = req.query || {}
     req.query.accountid = req.account.accountid
-    console.log('patching', req.body, req.query)
     await global.api.user.localization.SetAccountLanguage.patch(req)
   } catch (error) {
     return renderPage(req, res, error.message)

@@ -55,7 +55,6 @@ async function beforeRequest (req) {
     }
   }
   req.data = { language, phrase, instances }
-  console.log('setting up form data', req.data)
 }
 
 async function renderPage (req, res, messageTemplate) {
@@ -68,7 +67,6 @@ async function renderPage (req, res, messageTemplate) {
       const submitForm = doc.getElementById('submit-form')
       submitForm.parentNode.removeChild(submitForm)
     }
-    console.log('ended with message template', messageTemplate)
     return dashboard.Response.end(req, res, doc)
   }
   dashboard.HTML.renderTable(doc, req.data.instances, 'instance-row', 'instances-table')

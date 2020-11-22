@@ -31,7 +31,6 @@ describe('/account/localization', () => {
       req.account = user.account
       req.session = user.session
       const result = await req.get()
-      console.log(result)
       const doc = TestHelper.extractDoc(result.html)
       assert.strictEqual(doc.getElementById('submit-form').tag, 'form')
       assert.strictEqual(doc.getElementById('submit-button').tag, 'button')

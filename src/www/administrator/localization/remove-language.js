@@ -20,7 +20,6 @@ function renderPage (req, res, messageTemplate) {
   const doc = dashboard.HTML.parse(req.html || req.route.html, req.data.language, 'language', req.language)
   navbar.setup(doc, req.data.language)
   if (messageTemplate) {
-    console.log('rendering message', messageTemplate)
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
     if (messageTemplate === 'success') {
       const submitForm = doc.getElementById('submit-form')

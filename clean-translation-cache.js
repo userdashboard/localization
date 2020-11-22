@@ -14,7 +14,6 @@ module.exports = async (original, translation) => {
       }
     }
     if (!found) {
-      console.log('remove unused phrase', phrase)
       delete (translation[phrase])
     }
   }

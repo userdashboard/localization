@@ -34,7 +34,6 @@ describe('/api/administrator/localization/active-languages', () => {
     cachedResponses.returns = await req4.get()
     global.pageSize = 3
     cachedResponses.pageSize = await req4.get()
-    console.log(cachedResponses)
   })
   describe('receives', () => {
     it('optional querystring offset (integer)', async () => {

@@ -2,28 +2,13 @@
 const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
-describe('/api/user/localization/set-account-language', () => {
-  let languages
-  before(() => {
-    languages = global.languages
-  })
-  beforeEach(() => {
-    global.languages = JSON.parse(JSON.stringify(languages))
-    for (const language of global.languages) {
-      if (language.languageid === 'es') {
-        return
-      }
-    }
-    global.languages.push({ object: 'language', languageid: 'es', name: 'Español' })
-  })
-  afterEach(() => {
-    global.languages = JSON.parse(JSON.stringify(languages))
-  })
+describe('/api/user/localization/localization/set-account-language', () => {
   describe('exceptions', () => {
     describe('invalid-accountid', () => {
       it('missing querystring accountid', async () => {
+        global.enableLanguagePreference = true
         const user = await TestHelper.createUser()
-        const req = TestHelper.createRequest('/api/user/set-account-language')
+        const req = TestHelper.createRequest('/api/user/localization/set-account-language')
         req.account = user.account
         req.session = user.session
         req.body = {
@@ -39,8 +24,9 @@ describe('/api/user/localization/set-account-language', () => {
       })
 
       it('invalid querystring accountid', async () => {
+        global.enableLanguagePreference = true
         const user = await TestHelper.createUser()
-        const req = TestHelper.createRequest('/api/user/set-account-language?accountid=invalid')
+        const req = TestHelper.createRequest('/api/user/localization/set-account-language?accountid=invalid')
         req.account = user.account
         req.session = user.session
         req.body = {
@@ -58,9 +44,10 @@ describe('/api/user/localization/set-account-language', () => {
 
     describe('invalid-account', () => {
       it('ineligible accessing account', async () => {
+        global.enableLanguagePreference = true
         const user = await TestHelper.createUser()
         const user2 = await TestHelper.createUser()
-        const req = TestHelper.createRequest(`/api/user/set-account-language?accountid=${user2.account.accountid}`)
+        const req = TestHelper.createRequest(`/api/user/localization/set-account-language?accountid=${user2.account.accountid}`)
         req.account = user.account
         req.session = user.session
         req.body = {
@@ -76,48 +63,53 @@ describe('/api/user/localization/set-account-language', () => {
       })
     })
 
+    describe('invalid-languageid', () => {
+      it('missing posted languageid', async () => {
+        global.enableLanguagePreference = true
+        const user = await TestHelper.createUser()
+        const req = TestHelper.createRequest(`/api/user/localization/set-account-language?accountid=${user.account.accountid}`)
+        req.account = user.account
+        req.session = user.session
+        req.body = {
+          languageid: ''
+        }
+        let errorMessage
+        try {
+          await req.patch(req)
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-languageid')
+      })
+
+      it('invalid posted languageid', async () => {
+        global.enableLanguagePreference = true
+        const user = await TestHelper.createUser()
+        const req = TestHelper.createRequest(`/api/user/localization/set-account-language?accountid=${user.account.accountid}`)
+        req.account = user.account
+        req.session = user.session
+        req.body = {
+          languageid: 'invalid'
+        }
+        let errorMessage
+        try {
+          await req.patch(req)
+        } catch (error) {
+          errorMessage = error.message
+        }
+        assert.strictEqual(errorMessage, 'invalid-languageid')
+      })
+    })
+
     describe('invalid-language', () => {
-      it('missing posted language', async () => {
+      it('inactive posted languageid', async () => {
+        global.enableLanguagePreference = true
         const user = await TestHelper.createUser()
-        const req = TestHelper.createRequest(`/api/user/set-account-language?accountid=${user.account.accountid}`)
+        const req = TestHelper.createRequest(`/api/user/localization/set-account-language?accountid=${user.account.accountid}`)
         req.account = user.account
         req.session = user.session
         req.body = {
-          language: ''
-        }
-        let errorMessage
-        try {
-          await req.patch(req)
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-language')
-      })
-
-      it('invalid posted language', async () => {
-        const user = await TestHelper.createUser()
-        const req = TestHelper.createRequest(`/api/user/set-account-language?accountid=${user.account.accountid}`)
-        req.account = user.account
-        req.session = user.session
-        req.body = {
-          language: 'invalid'
-        }
-        let errorMessage
-        try {
-          await req.patch(req)
-        } catch (error) {
-          errorMessage = error.message
-        }
-        assert.strictEqual(errorMessage, 'invalid-language')
-      })
-
-      it('inactive posted language', async () => {
-        const user = await TestHelper.createUser()
-        const req = TestHelper.createRequest(`/api/user/set-account-language?accountid=${user.account.accountid}`)
-        req.account = user.account
-        req.session = user.session
-        req.body = {
-          language: 'fr'
+          languageid: 'fr'
         }
         let errorMessage
         try {
@@ -131,35 +123,42 @@ describe('/api/user/localization/set-account-language', () => {
   })
 
   describe('receives', () => {
-    it('required posted language', async () => {
+    it('required posted languageid', async () => {
+      global.enableLanguagePreference = true
+      const administrator = await TestHelper.createOwner()
+      await TestHelper.setLanguageActive(administrator, 'es')
       const user = await TestHelper.createUser()
-      assert.strictEqual(user.account.language, undefined)
-      const req = TestHelper.createRequest(`/api/user/set-account-language?accountid=${user.account.accountid}`)
+      assert.strictEqual(user.account.languageid, undefined)
+      const req = TestHelper.createRequest(`/api/user/localization/set-account-language?accountid=${user.account.accountid}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        language: 'es'
+        languageid: 'es'
       }
       req.filename = __filename
       req.saveResponse = true
       const account = await req.patch()
-      assert.strictEqual(account.language, 'es')
+      assert.strictEqual(account.languageid, 'es')
     })
   })
 
   describe('returns', () => {
     it('object', async () => {
+      global.enableLanguagePreference = true
+      const administrator = await TestHelper.createOwner()
+      await TestHelper.setLanguageActive(administrator, 'fr')
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest(`/api/user/set-account-language?accountid=${user.account.accountid}`)
+      const req = TestHelper.createRequest(`/api/user/localization/set-account-language?accountid=${user.account.accountid}`)
       req.account = user.account
       req.session = user.session
       req.body = {
-        language: 'es'
+        languageid: 'fr'
       }
       req.filename = __filename
       req.saveResponse = true
       const account = await req.patch()
       assert.strictEqual(account.object, 'account')
+      assert.strictEqual(account.languageid, 'fr')
     })
   })
 })

@@ -33,13 +33,11 @@ describe('/api/administrator/localization/all-languages', () => {
     cachedResponses.returns = await req4.get()
     global.pageSize = 3
     cachedResponses.pageSize = await req4.get()
-    console.log(cachedResponses)
   })
   describe('receives', () => {
     it('optional querystring offset (integer)', async () => {
       const offset = 1
       const languagesNow = cachedResponses.offset
-      console.log(languagesNow, cachedLanguages)
       for (let i = 0, len = global.pageSize; i < len; i++) {
         assert.strictEqual(languagesNow[i].languageid, cachedLanguages[offset + i])
       }

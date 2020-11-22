@@ -21,7 +21,6 @@ describe('/administrator/localization/edit-phrase', () => {
       req.account = administrator.account
       req.session = administrator.session
       const result = await req.get()
-      console.log(result)
       const doc = TestHelper.extractDoc(result.html)
       assert.strictEqual(doc.getElementById('submit-form').tag, 'form')
       assert.strictEqual(doc.getElementById('submit-button').tag, 'button')

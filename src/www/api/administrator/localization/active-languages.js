@@ -6,13 +6,10 @@ module.exports = {
     const storage = req.storage || localization
     let languageids
     if (req.query.all) {
-      console.log('all', true)
       languageids = await storage.StorageList.listAll(`${req.appid}/activeLanguages`)
     } else {
       const offset = req.query.offset ? parseInt(req.query.offset, 10) : 0
       const limit = req.query.limit ? parseInt(req.query.limit, 10) : global.pageSize
-      console.log('offset', offset)
-      console.log('limit', limit)
       languageids = await storage.StorageList.list(`${req.appid}/activeLanguages`, offset, limit)
     }
     if (!languageids || !languageids.length) {

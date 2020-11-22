@@ -61,7 +61,6 @@ module.exports = async (original) => {
     } else {
       retries1 = 0
     }
-    console.log('fetching', locale, lines.length)
     const returnedLines = stdout.split('\\n')
     if (returnedLines.length !== chunk.length) {
       retries2++

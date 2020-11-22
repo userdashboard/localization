@@ -20,6 +20,7 @@ module.exports = {
       throw new Error('invalid-language')
     }
     await localization.StorageList.remove(`${req.appid}/activeLanguages`, req.query.languageid)
+    delete (selectedLanguage.active)
     return selectedLanguage
   }
 }

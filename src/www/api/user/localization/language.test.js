@@ -2,14 +2,14 @@
 const assert = require('assert')
 const TestHelper = require('../../../../../test-helper.js')
 
-describe('/api/administrator/localization/translation', () => {
+describe('/api/user/localization/language', () => {
   describe('exceptions', () => {
     describe('invalid-languageid', () => {
       it('unspecified querystring languageid', async () => {
-        const administrator = await TestHelper.createOwner()
-        const req = TestHelper.createRequest('/api/administrator/localization/translation')
-        req.account = administrator.account
-        req.session = administrator.session
+        const user = await TestHelper.createUser()
+        const req = TestHelper.createRequest('/api/user/localization/language')
+        req.account = user.account
+        req.session = user.session
         let errorMessage
         try {
           await req.get()
@@ -20,10 +20,10 @@ describe('/api/administrator/localization/translation', () => {
       })
 
       it('invalid querystring languageid', async () => {
-        const administrator = await TestHelper.createOwner()
-        const req = TestHelper.createRequest('/api/administrator/localization/translation?languageid=invalid')
-        req.account = administrator.account
-        req.session = administrator.session
+        const user = await TestHelper.createUser()
+        const req = TestHelper.createRequest('/api/user/localization/language?languageid=invalid')
+        req.account = user.account
+        req.session = user.session
         let errorMessage
         try {
           await req.get()
@@ -38,13 +38,15 @@ describe('/api/administrator/localization/translation', () => {
   describe('returns', () => {
     it('object', async () => {
       const administrator = await TestHelper.createOwner()
-      const req = TestHelper.createRequest(`/api/administrator/localization/translation?languageid=it`)
-      req.account = administrator.account
-      req.session = administrator.session
+      await TestHelper.setLanguageActive(administrator, 'it')
+      const user = await TestHelper.createUser()
+      const req = TestHelper.createRequest(`/api/user/localization/language?languageid=it`)
+      req.account = user.account
+      req.session = user.session
       req.filename = __filename
       req.saveResponse = true
-      const translation = await req.get()
-      assert.strictEqual(translation.object, 'translation')
+      const language = await req.get()
+      assert.strictEqual(language.object, 'language')
     })
   })
 })

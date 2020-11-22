@@ -30,7 +30,6 @@ function renderPage (req, res) {
       removeElements.push(`active-${language.languageid}`)
     }
   }
-  console.log(removeElements)
   for (const id of removeElements) {
     const element = doc.getElementById(id)
     element.parentNode.removeChild(element)

@@ -7,14 +7,8 @@ async function setupBefore () {
   global.testConfiguration.enableLanguagePreference = true
 }
 
-async function setupBeforeEach () {
-  console.log('resetting configuration', global.testConfiguration)
-}
-
 before(setupBefore)
-beforeEach(setupBeforeEach)
 module.exports.setupBefore = setupBefore
-module.exports.setupbeforeEach = setupBeforeEach
 module.exports.setUserLanguage = setUserLanguage
 module.exports.setLanguageActive = setLanguageActive
 module.exports.setLanguageInactive = setLanguageInactive

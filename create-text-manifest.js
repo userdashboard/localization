@@ -28,9 +28,6 @@ function scanElement (module, element, file, addedHTMLTags) {
         }
       }
     }
-    if (!text) {
-      console.log('no text', element.toString(), file)
-    }
     if (text.indexOf('${') > -1) {
       text = text.substring(0, text.indexOf('${'))
     }
