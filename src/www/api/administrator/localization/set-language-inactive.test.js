@@ -37,7 +37,7 @@ describe('/api/administrator/localization/set-language-inactive', () => {
     describe('invalid-language', () => {
       it('ineligible querystring language is not active', async () => {
         const administrator = await TestHelper.createOwner()
-        const req = TestHelper.createRequest(`/api/administrator/localization/set-language-inactive?languageid=fr`)
+        const req = TestHelper.createRequest('/api/administrator/localization/set-language-inactive?languageid=fr')
         req.account = administrator.account
         req.session = administrator.session
         let errorMessage
@@ -54,7 +54,7 @@ describe('/api/administrator/localization/set-language-inactive', () => {
   describe('requires', () => {
     it('querystring languageid is not active', async () => {
       const administrator = await TestHelper.createOwner()
-      const req = TestHelper.createRequest(`/api/administrator/localization/set-language-inactive?languageid=fr`)
+      const req = TestHelper.createRequest('/api/administrator/localization/set-language-inactive?languageid=fr')
       req.account = administrator.account
       req.session = administrator.session
       let errorMessage
@@ -71,7 +71,7 @@ describe('/api/administrator/localization/set-language-inactive', () => {
     it('object', async () => {
       const administrator = await TestHelper.createOwner()
       await TestHelper.setLanguageActive(administrator, 'fr')
-      const req = TestHelper.createRequest(`/api/administrator/localization/set-language-inactive?languageid=fr`)
+      const req = TestHelper.createRequest('/api/administrator/localization/set-language-inactive?languageid=fr')
       req.account = administrator.account
       req.session = administrator.session
       req.filename = __filename

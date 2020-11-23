@@ -38,7 +38,7 @@ describe('/api/administrator/localization/set-language-active', () => {
       it('ineligible querystring language is already active', async () => {
         const administrator = await TestHelper.createOwner()
         await TestHelper.setLanguageActive(administrator, 'fr')
-        const req = TestHelper.createRequest(`/api/administrator/localization/set-language-active?languageid=fr`)
+        const req = TestHelper.createRequest('/api/administrator/localization/set-language-active?languageid=fr')
         req.account = administrator.account
         req.session = administrator.session
         let errorMessage
@@ -56,7 +56,7 @@ describe('/api/administrator/localization/set-language-active', () => {
     it('querystring languageid is already active', async () => {
       const administrator = await TestHelper.createOwner()
       await TestHelper.setLanguageActive(administrator, 'fr')
-      const req = TestHelper.createRequest(`/api/administrator/localization/set-language-active?languageid=fr`)
+      const req = TestHelper.createRequest('/api/administrator/localization/set-language-active?languageid=fr')
       req.account = administrator.account
       req.session = administrator.session
       let errorMessage
@@ -72,7 +72,7 @@ describe('/api/administrator/localization/set-language-active', () => {
   describe('returns', () => {
     it('object', async () => {
       const administrator = await TestHelper.createOwner()
-      const req = TestHelper.createRequest(`/api/administrator/localization/set-language-active?languageid=fr`)
+      const req = TestHelper.createRequest('/api/administrator/localization/set-language-active?languageid=fr')
       req.account = administrator.account
       req.session = administrator.session
       req.filename = __filename

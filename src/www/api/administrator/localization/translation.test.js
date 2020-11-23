@@ -38,7 +38,7 @@ describe('/api/administrator/localization/translation', () => {
   describe('returns', () => {
     it('object', async () => {
       const administrator = await TestHelper.createOwner()
-      const req = TestHelper.createRequest(`/api/administrator/localization/translation?languageid=it`)
+      const req = TestHelper.createRequest('/api/administrator/localization/translation?languageid=it')
       req.account = administrator.account
       req.session = administrator.session
       req.filename = __filename

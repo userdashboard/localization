@@ -42,7 +42,7 @@ describe('/api/user/localization/translation', () => {
       const administrator = await TestHelper.createOwner()
       await TestHelper.setLanguageActive(administrator, 'it')
       const user = await TestHelper.createUser()
-      const req = TestHelper.createRequest(`/api/user/localization/translation?languageid=it`)
+      const req = TestHelper.createRequest('/api/user/localization/translation?languageid=it')
       req.account = user.account
       req.session = user.session
       req.filename = __filename
