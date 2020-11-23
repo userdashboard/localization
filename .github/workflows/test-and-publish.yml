@@ -65,6 +65,7 @@ jobs:
         RESPONSE_PATH: "/home/runner/work/localization/localization/documentation"
         SCREENSHOT_PATH: "/home/runner/work/localization/localization/documentation/screenshots"
         SCREENSHOT_LANGUAGES: "en"
+        LOG_LEVEL: "info,warn,error,log"
     - name: Generate supporting texts
       run: |
         echo 14
