@@ -5,7 +5,7 @@ module.exports = {
     if (!req.query || !req.query.languageid) {
       throw new Error('invalid-languageid')
     }
-    if (!localization.languageIndex[req.query.langugeid]) {
+    if (!localization.languageIndex[req.query.languageid]) {
       throw new Error('invalid-languageid')
     }
     let selectedLanguage
