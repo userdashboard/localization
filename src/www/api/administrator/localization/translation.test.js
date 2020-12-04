@@ -44,7 +44,8 @@ describe('/api/administrator/localization/translation', () => {
       req.filename = __filename
       req.saveResponse = true
       const translation = await req.get()
-      assert.strictEqual(translation.object, 'translation')
+      assert.notStrictEqual(translation, undefined)
+      assert.notStrictEqual(translation, null)
     })
   })
 })
