@@ -6,13 +6,17 @@ module.exports = {
 }
 
 async function beforeRequest (req) {
+  req.query = req.query || {}
+  req.query.all = true
   const languages = await global.api.administrator.localization.AllLanguages.get(req)
   const activeLanguages = await global.api.administrator.localization.ActiveLanguages.get(req)
-  for (const language of languages) {
-    for (const object of activeLanguages) {
-      if (object.languageid === language.languageid) {
-        language.active = true
-        break
+  if (activeLanguages && activeLanguages.length) {
+    for (const language of languages) {
+      for (const object of activeLanguages) {
+        if (object.languageid === language.languageid) {
+          language.active = true
+          break
+        }
       }
     }
   }

@@ -9,11 +9,14 @@ module.exports = {
       if (language.languageid !== req.query.languageid) {
         continue
       }
+      const copy = JSON.parse(JSON.stringify(language))
       const activeLanguages = await localization.StorageList.listAll(`${req.appid}/activeLanguages`)
       if (activeLanguages && activeLanguages.length) {
-        language.active = activeLanguages.indexOf(language.languageid) > -1
+        copy.active = activeLanguages.indexOf(language.languageid) > -1
+      } else {
+        copy.active = false
       }
-      return language
+      return copy
     }
     throw new Error('invalid-languageid')
   }

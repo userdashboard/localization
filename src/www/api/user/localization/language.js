@@ -16,7 +16,7 @@ module.exports = {
       if (!language.active) {
         throw new Error('invalid-language')
       }
-      return language
+      return JSON.parse(JSON.stringify(language))
     }
     throw new Error('invalid-languageid')
   }

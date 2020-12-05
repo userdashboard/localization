@@ -9,14 +9,15 @@ module.exports = {
       throw new Error('invalid-languageid')
     }
     const translation = require(`../../../../../translations-cache-${req.query.languageid}`)
+    const copy = JSON.parse(JSON.stringify(translation))
     const correctionsRaw = await localization.Storage.read(`corrections/${req.query.languageid}`)
     if (!correctionsRaw || !correctionsRaw.length) {
-      return translation
+      return copy
     }
     const corrections = JSON.parse(correctionsRaw)
     for (const phrase in corrections) {
-      translation[phrase].corrections = corrections[phrase]
+      copy[phrase].corrections = corrections[phrase]
     }
-    return translation
+    return copy
   }
 }
