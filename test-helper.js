@@ -2,13 +2,9 @@
 global.applicationPath = global.applicationPath || __dirname
 const TestHelper = require('@userdashboard/dashboard/test-helper.js')
 module.exports = TestHelper
+global.testConfiguration.enableLanguagePreference = true
+global.testConfiguration.language = undefined
 
-async function setupBefore () {
-  global.testConfiguration.enableLanguagePreference = true
-}
-
-before(setupBefore)
-module.exports.setupBefore = setupBefore
 module.exports.setUserLanguage = setUserLanguage
 module.exports.setLanguageActive = setLanguageActive
 module.exports.setLanguageInactive = setLanguageInactive
