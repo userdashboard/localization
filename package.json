@@ -18,7 +18,7 @@
   },
   "description": "Localized content for Dashboard and its official modules",
   "peerDependencies": {
-    "@userdashboard/dashboard": ">=1"
+    "@userdashboard/dashboard": "latest"
   },
   "engines": {
     "node": ">=14.0",
