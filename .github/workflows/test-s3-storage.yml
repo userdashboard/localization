@@ -46,6 +46,7 @@ jobs:
         echo $PACKAGE > package.json
         echo "global.applicationPath = __dirname" > main.js
         echo "require('@userdashboard/localization/test-helper.js')" >> main.js
+        aws --endpoint-url=http://localhost:4566 s3 mb s3://testing
       env:
         AWS_SECRET_ACCESS_KEY: using-mock-aws-s3
         AWS_ACCESS_KEY_ID: using-mock-aws-s3
