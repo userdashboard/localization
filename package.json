@@ -1,22 +1,8 @@
 {
-  "name": "@userdashboard/localization",
-  "version": "1.0.9",
-  "description": "Localized content for Dashboard and its official modules",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/userdashboard/localization.git"
-  },
-  "keywords": [],
   "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/userdashboard/localization/issues"
   },
-  "homepage": "https://github.com/userdashboard/localization#readme",
   "dashboard": {
     "title": "Localization module",
     "content": [
@@ -29,5 +15,26 @@
     "proxy": [
       "/src/proxy/x-language-header.js"
     ]
-  }
+  },
+  "description": "Localized content for Dashboard and its official modules",
+  "peerDependencies": {
+    "@userdashboard/dashboard": ">=1"
+  },
+  "engines": {
+    "node": ">=14.0",
+    "npm": ">=6.0"
+  },
+  "homepage": "https://github.com/userdashboard/localization#readme",
+  "keywords": [],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "@userdashboard/localization",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/userdashboard/localization.git"
+  },
+  "scripts": {
+    "test": "act -j test-fs-storage"
+  },
+  "version": "1.0.9"
 }
