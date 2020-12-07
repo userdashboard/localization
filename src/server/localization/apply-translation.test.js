@@ -3,7 +3,7 @@ const assert = require('assert')
 const applyLanguagePreference = require('./apply-translation.js')
 const TestHelper = require('../../test-helper.js')
 
-describe('server/apply-translation', () => {
+describe('server/localization/apply-translation', () => {
   it('should return application default', async () => {
     delete (global.language)
     delete (global.enableLanguagePreference)

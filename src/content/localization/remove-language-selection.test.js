@@ -4,7 +4,7 @@ const TestHelper = require('../../test-helper.js')
 const RemoveLanguageSelection = require('./remove-language-selection.js')
 const dashboard = require('@userdashboard/dashboard')
 
-describe('content/remove-language-selection', () => {
+describe('content/localization/remove-language-selection', () => {
   describe('template', () => {
     it('should remove language option by default', async () => {
       delete (global.enableLanguagePreference)

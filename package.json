@@ -6,19 +6,19 @@
   "dashboard": {
     "title": "Localization module",
     "content": [
-      "/src/content/remove-language-selection.js",
-      "/src/content/set-html-language-attribute.js"
+      "/src/content/localization/remove-language-selection.js",
+      "/src/content/localization/set-html-language-attribute.js"
     ],
     "server": [
-      "/src/server/apply-translation.js"
+      "/src/server/localization/apply-translation.js"
     ],
     "proxy": [
-      "/src/proxy/x-language-header.js"
+      "/src/proxy/localization/x-language-header.js"
     ]
   },
   "description": "Localized content for Dashboard and its official modules",
   "peerDependencies": {
-    "@userdashboard/dashboard": "latest"
+    "@userdashboard/dashboard": "1.0.0 - 9999.9999.9999"
   },
   "engines": {
     "node": ">=14.0",

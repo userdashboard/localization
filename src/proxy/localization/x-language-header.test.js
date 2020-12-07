@@ -3,7 +3,7 @@ const assert = require('assert')
 const XLanguageHeader = require('./x-language-header.js')
 const TestHelper = require('../../test-helper.js')
 
-describe('proxy/x-language-header', () => {
+describe('proxy/localization/x-language-header', () => {
   it('should bind data from user preference', async () => {
     const user = await TestHelper.createUser()
     const req = TestHelper.createRequest('/account/change-username')

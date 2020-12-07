@@ -4,7 +4,7 @@ const TestHelper = require('../../test-helper.js')
 const SetHTMLLanguageAttribute = require('./set-html-language-attribute.js')
 const dashboard = require('@userdashboard/dashboard')
 
-describe('content/set-html-language-attribute', () => {
+describe('content/localization/set-html-language-attribute', () => {
   describe('template', () => {
     it('should not change if unspecified', async () => {
       const user = await TestHelper.createUser()
