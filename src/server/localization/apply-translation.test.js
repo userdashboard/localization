@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 const assert = require('assert')
 const applyLanguagePreference = require('./apply-translation.js')
-const TestHelper = require('../../test-helper.js')
+const TestHelper = require('../../../test-helper.js')
 
 describe('server/localization/apply-translation', () => {
   it('should return application default', async () => {

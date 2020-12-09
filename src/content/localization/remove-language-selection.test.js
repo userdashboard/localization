@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 const assert = require('assert')
-const TestHelper = require('../../test-helper.js')
+const TestHelper = require('../../../test-helper.js')
 const RemoveLanguageSelection = require('./remove-language-selection.js')
 const dashboard = require('@userdashboard/dashboard')
 

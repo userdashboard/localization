@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 const assert = require('assert')
 const XLanguageHeader = require('./x-language-header.js')
-const TestHelper = require('../../test-helper.js')
+const TestHelper = require('../../../test-helper.js')
 
 describe('proxy/localization/x-language-header', () => {
   it('should bind data from user preference', async () => {

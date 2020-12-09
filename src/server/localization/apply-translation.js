@@ -19,7 +19,7 @@ module.exports = {
     const translation = await global.api.user.localization.Translation.get(req)
     // perform substition on template
     const packageJSON = req.packageJSON || global.packageJSON
-    const templateHTML = req.templateHTML || packageJSON.templateHTML
+    const templateHTML = req.templateHTML || packageJSON.dashboard.templateHTML
     req.templateHTML = applyTranslation(translation, '/src/template.html', templateHTML)
     if (req.route && req.route.html) {
       const filePath = req.route.htmlFilePath.substring(req.route.htmlFilePath.indexOf('/src'))
@@ -29,14 +29,13 @@ module.exports = {
         navbar = navbar.substring(0, navbar.indexOf('"'))
         let navbarPath = path.join(global.rootPath, navbar)
         if (!fs.existsSync(navbarPath)) {
-          navbarPath = path.join(global.applicationPath, `node_modules/@userdashboard/dashboard/src/www${navbar}`)
-          if (!fs.existsSync(navbarPath)) {
+          navbarPath = require.resolve(`@userdashboard/dashboard/src/www${navbar}`)
+          if (!navbarPath) {
             for (const moduleName of global.packageJSON.dashboard.moduleNames) {
-              navbarPath = `${global.applicationPath}/node_modules/${moduleName}/src/www${navbar}`
-              if (fs.existsSync(navbarPath)) {
+              navbarPath = require.resolve(`${moduleName}/src/www${navbar}`)
+              if (navbarPath) {
                 break
               }
-              navbarPath = null
             }
           }
         }
