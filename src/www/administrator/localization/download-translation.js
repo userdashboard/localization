@@ -8,6 +8,6 @@ async function renderPage (req, res) {
   }
   const translation = await global.api.administrator.localization.Translation.get(req)
   res.setHeader('content-type', 'text/json')
-  res.setHeader('content-disposition', `attachment; filename=translation-cache-${req.query.languageid}.json`)
+  res.setHeader('content-disposition', `attachment; filename=translations-cache-${req.query.languageid}.json`)
   res.end(JSON.stringify(translation, null, ' '))
 }

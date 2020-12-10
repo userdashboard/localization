@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const locale = process.argv[2]
-const cacheFile = path.join(__dirname, `translations-cache-${locale}.json`)
+const cacheFile = path.join(__dirname, `cache/translations-cache-${locale}.json`)
 let cache
 if (fs.existsSync(cacheFile)) {
   cache = JSON.parse(fs.readFileSync(cacheFile).toString())
@@ -20,4 +20,4 @@ for (const phrase in cache) {
     }
   }
 }
-fs.writeFileSync(`./translations-cache-${locale}.json`, JSON.stringify(cache, null, '  '))
+fs.writeFileSync(`./cache/translations-cache-${locale}.json`, JSON.stringify(cache, null, '  '))

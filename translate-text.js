@@ -3,7 +3,7 @@ const fs = require('fs')
 const locale = process.argv[2]
 const path = require('path')
 const util = require('util')
-const cacheFile = path.join(__dirname, `translations-cache-${locale}.json`)
+const cacheFile = path.join(__dirname, `cache/translations-cache-${locale}.json`)
 let translations
 if (fs.existsSync(cacheFile)) {
   translations = JSON.parse(fs.readFileSync(cacheFile).toString())
@@ -28,7 +28,7 @@ module.exports = async (original) => {
     }
   }
   if (!lines.length) {
-    fs.writeFileSync(`./translations-cache-${locale}.json`, JSON.stringify(translations, null, '  '))
+    fs.writeFileSync(`./cache/translations-cache-${locale}.json`, JSON.stringify(translations, null, '  '))
     return translations
   }
   let retries1 = 0
@@ -53,7 +53,7 @@ module.exports = async (original) => {
     if (!stdout || !stdout.length) {
       retries1++
       if (retries1 === 20) {
-        fs.writeFileSync(`./translations-cache-${locale}.json`, JSON.stringify(translations, null, '  '))
+        fs.writeFileSync(`./cache/translations-cache-${locale}.json`, JSON.stringify(translations, null, '  '))
         return translations
       }
       await wait()
@@ -65,7 +65,7 @@ module.exports = async (original) => {
     if (returnedLines.length !== chunk.length) {
       retries2++
       if (retries2 === 20) {
-        fs.writeFileSync(`./translations-cache-${locale}.json`, JSON.stringify(translations, null, '  '))
+        fs.writeFileSync(`./cache/translations-cache-${locale}.json`, JSON.stringify(translations, null, '  '))
         return translations
       }
       await wait()
@@ -92,7 +92,7 @@ module.exports = async (original) => {
     }
     await wait()
   }
-  fs.writeFileSync(`./translations-cache-${locale}.json`, JSON.stringify(translations, null, '  '))
+  fs.writeFileSync(`./cache/translations-cache-${locale}.json`, JSON.stringify(translations, null, '  '))
   return translations
 }
 

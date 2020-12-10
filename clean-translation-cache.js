@@ -1,7 +1,7 @@
 const fs = require('fs')
 const locale = process.argv[2]
 const path = require('path')
-const translationFilePath = path.join(__dirname, `translations-cache-${locale}.json`)
+const translationFilePath = path.join(__dirname, `cache/translations-cache-${locale}.json`)
 
 module.exports = async (original, translation) => {
   const translatedPhrases = Object.keys(translation)
