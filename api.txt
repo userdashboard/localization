@@ -1,2 +1,93 @@
-@userdashboard/dashboard 1.0.361
+@userdashboard/dashboard 1.0.378
 http://localhost:8000
+
+|----------------------------------------------|
+| /account/localization                        |
+| EXCEPTIONS-----------------------------------|
+| undefined                                    |
+|  * should require language enabled           |
+| view                                         |
+|  * should present the form                   |
+| submit                                       |
+|  * should change the language (screenshots)  |
+|----------------------------------------------|
+
+|----------------------------------------------------------------------------|
+| /api/administrator/localization/active-languages                           |
+| RECEIVES-------------------------------| RETURNS--| CONFIGURATION----------|
+| optional querystring offset (integer)  | array    | environment PAGE_SIZE  |
+| optional querystring limit (integer)   |          |                        |
+| optional querystring all (boolean)     |          |                        |
+|----------------------------------------|----------|------------------------|
+
+|----------------------------------------------------------------------------|
+| /api/administrator/localization/all-languages                              |
+| RECEIVES-------------------------------| RETURNS--| CONFIGURATION----------|
+| optional querystring offset (integer)  | array    | environment PAGE_SIZE  |
+| optional querystring limit (integer)   |          |                        |
+| optional querystring all (boolean)     |          |                        |
+|----------------------------------------|----------|------------------------|
+
+|---------------------------------------------------|
+| /api/administrator/localization/language          |
+| RETURNS--| EXCEPTIONS-----------------------------|
+| object   | invalid-languageid                     |
+|          |  * unspecified querystring languageid  |
+|          |  * invalid querystring languageid      |
+|----------|----------------------------------------|
+
+|------------------------------------------------------------------|
+| /api/administrator/localization/set-language-active              |
+| RETURNS--| EXCEPTIONS--------------------------------------------|
+| object   | invalid-languageid                                    |
+|          |  * unspecified querystring languageid                 |
+|          |  * invalid querystring languageid                     |
+|          | invalid-language                                      |
+|          |  * ineligible querystring language is already active  |
+|          | requires                                              |
+|          |  * querystring languageid is already active           |
+|----------|-------------------------------------------------------|
+
+|--------------------------------------------------------------|
+| /api/administrator/localization/set-language-inactive        |
+| RETURNS--| EXCEPTIONS----------------------------------------|
+| object   | invalid-languageid                                |
+|          |  * unspecified querystring languageid             |
+|          |  * invalid querystring languageid                 |
+|          | invalid-language                                  |
+|          |  * ineligible querystring language is not active  |
+|          | requires                                          |
+|          |  * querystring languageid is not active           |
+|----------|---------------------------------------------------|
+
+|---------------------------------------------------|
+| /api/administrator/localization/translation       |
+| RETURNS--| EXCEPTIONS-----------------------------|
+| object   | invalid-languageid                     |
+|          |  * unspecified querystring languageid  |
+|          |  * invalid querystring languageid      |
+|----------|----------------------------------------|
+
+|---------------------------------------------------|
+| /api/user/localization/language                   |
+| RETURNS--| EXCEPTIONS-----------------------------|
+| object   | invalid-languageid                     |
+|          |  * unspecified querystring languageid  |
+|          |  * invalid querystring languageid      |
+|----------|----------------------------------------|
+
+|----------------------------------------------------------------------------|
+| /api/user/localization/languages                                           |
+| RECEIVES-------------------------------| RETURNS--| CONFIGURATION----------|
+| optional querystring offset (integer)  | array    | environment PAGE_SIZE  |
+| optional querystring limit (integer)   |          |                        |
+| optional querystring all (boolean)     |          |                        |
+|----------------------------------------|----------|------------------------|
+
+|---------------------------------------------------|
+| /api/user/localization/translation                |
+| RETURNS--| EXCEPTIONS-----------------------------|
+| object   | invalid-languageid                     |
+|          |  * unspecified querystring languageid  |
+|          |  * invalid querystring languageid      |
+|----------|----------------------------------------|

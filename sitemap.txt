@@ -1,4 +1,4 @@
-@userdashboard/dashboard 1.0.361
+@userdashboard/dashboard 1.0.378
 http://localhost:8000
 
 Administrator menu:
@@ -10,9 +10,9 @@ Account menu:
 /account "My account"
 
 Special HTML files:
-@userdashboard/dashboard/src/template.html
-@userdashboard/dashboard/src/error.html
-@userdashboard/dashboard/src/redirect.html
+@userdashboard/dashboard/template.html
+@userdashboard/dashboard/error.html
+@userdashboard/dashboard/redirect.html
 
 Content handlers:
 /src/content/localization/remove-language-selection.js
@@ -25,7 +25,6 @@ Proxy handlers:
 /src/proxy/localization/x-language-header.js
 
 URL ----------------------------------------------------- AUTH - TEMPLATE - HTTP REQUESTS - NODEJS --------------------- HTML -----------------------
-/                                                         GUEST  FULLSCREEN GET                                          @userdashboard/dashboard    
 /account                                                                    GET             @userdashboard/dashboard     @userdashboard/dashboard    
 /account/change-password                                                    GET POST        @userdashboard/dashboard     @userdashboard/dashboard    
 /account/change-username                                                    GET POST        @userdashboard/dashboard     @userdashboard/dashboard    
@@ -51,9 +50,8 @@ URL ----------------------------------------------------- AUTH - TEMPLATE - HTTP
 /account/set-default-profile                                                GET POST        @userdashboard/dashboard     @userdashboard/dashboard    
 /account/signin                                           GUEST  FULLSCREEN GET POST        @userdashboard/dashboard     @userdashboard/dashboard    
 /account/signout                                          GUEST  FULLSCREEN GET             @userdashboard/dashboard     @userdashboard/dashboard    
-/account/signout-complete                                 GUEST  FULLSCREEN GET                                          @userdashboard/dashboard    
+/account/signout-complete                                 GUEST  FULLSCREEN                 static-page                  @userdashboard/dashboard    
 /account/verify                                           GUEST  FULLSCREEN GET POST        @userdashboard/dashboard     @userdashboard/dashboard    
-/administrator                                                              GET                                          @userdashboard/dashboard    
 /administrator/account                                                      GET             @userdashboard/dashboard     @userdashboard/dashboard    
 /administrator/account-profiles                                             GET             @userdashboard/dashboard     @userdashboard/dashboard    
 /administrator/account-reset-codes                                          GET             @userdashboard/dashboard     @userdashboard/dashboard    
@@ -66,7 +64,7 @@ URL ----------------------------------------------------- AUTH - TEMPLATE - HTTP
 /administrator/delete-schedule                                              GET             @userdashboard/dashboard     @userdashboard/dashboard    
 /administrator/localization                                                 GET             /src/www                     /src/www                    
 /administrator/localization/activate-language                               GET POST        /src/www                     /src/www                    
-/administrator/localization/download-translation                            GET             /src/www                                                 
+/administrator/localization/download-translation                            GET             /src/www                     /src/www                    
 /administrator/localization/edit-phrase                                     GET POST        /src/www                     /src/www                    
 /administrator/localization/language                                        GET             /src/www                     /src/www                    
 /administrator/localization/remove-language                                 GET POST        /src/www                     /src/www                    
@@ -140,4 +138,4 @@ URL ----------------------------------------------------- AUTH - TEMPLATE - HTTP
 /api/user/set-session-ended                                                 PATCH           @userdashboard/dashboard                                 
 /api/user/set-session-verified                                              PATCH           @userdashboard/dashboard                                 
 /api/user/update-profile                                                    PATCH           @userdashboard/dashboard                                 
-/home                                                                       GET                                          @userdashboard/dashboard    
+/home                                                                                       static-page                  @userdashboard/dashboard    

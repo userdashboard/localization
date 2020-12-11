@@ -1,0 +1,187 @@
+
+
+  index
+    LANGUAGE
+      Default language
+        ✓ default en
+        ✓ String
+    ENABLE_LANGUAGE_PREFERENCE
+      Enable user language selection
+        ✓ Boolean
+
+  content/localization/remove-language-selection
+    template
+      ✓ should remove language option by default
+      ✓ should remove language option if disallowed
+      ✓ should present language option
+
+  content/localization/set-html-language-attribute
+    template
+      ✓ should not change if unspecified
+      ✓ should match global language setting
+      ✓ should match user language setting
+      ✓ should match request language setting
+    page
+      ✓ should not change if unspecified
+      ✓ should match global language setting
+      ✓ should match user language setting
+      ✓ should match request language setting
+
+  proxy/localization/x-language-header
+    ✓ should bind data from user preference
+    ✓ should bind data from global.language
+    ✓ should bind default language (en)
+
+  server/localization/apply-translation
+    ✓ should return application default
+    ✓ should apply configured language
+    ✓ should apply user-selected language
+
+  /account/localization
+    exceptions
+      ✓ should require language enabled
+    view
+      ✓ should present the form
+    submit
+      ✓ should change the language (screenshots)
+
+  /administrator/localization/activate-language
+    before
+      ✓ should bind data to req
+    view
+      ✓ should present the form
+    submit
+      ✓ should activate language (screenshots)
+
+  /administrator/localization/edit-phrase
+    before
+      ✓ should bind data to req
+    view
+      ✓ should present the form
+    submit
+      ✓ should create phrase corrections (screenshots)
+
+  /administrator/localization
+    view
+      ✓ should present the language table
+
+  /administrator/localization/language
+    before
+      ✓ should bind data to req
+    view
+      ✓ should present the language table
+
+  /administrator/localization/remove-language
+    before
+      ✓ should bind data to req
+    view
+      ✓ should present the form
+    submit
+      ✓ should remove language (screenshots)
+
+  /api/administrator/localization/active-languages
+    receives
+      ✓ optional querystring offset (integer)
+      ✓ optional querystring limit (integer)
+      ✓ optional querystring all (boolean)
+    returns
+      ✓ array
+    configuration
+      ✓ environment PAGE_SIZE
+
+  /api/administrator/localization/all-languages
+    receives
+      ✓ optional querystring offset (integer)
+      ✓ optional querystring limit (integer)
+      ✓ optional querystring all (boolean)
+    returns
+      ✓ array
+    configuration
+      ✓ environment PAGE_SIZE
+
+  /api/administrator/localization/language
+    exceptions
+      invalid-languageid
+        ✓ unspecified querystring languageid
+        ✓ invalid querystring languageid
+    returns
+      ✓ object
+
+  /api/administrator/localization/set-language-active
+    exceptions
+      invalid-languageid
+        ✓ unspecified querystring languageid
+        ✓ invalid querystring languageid
+      invalid-language
+        ✓ ineligible querystring language is already active
+    requires
+      ✓ querystring languageid is already active
+    returns
+      ✓ object
+
+  /api/administrator/localization/set-language-inactive
+    exceptions
+      invalid-languageid
+        ✓ unspecified querystring languageid
+        ✓ invalid querystring languageid
+      invalid-language
+        ✓ ineligible querystring language is not active
+    requires
+      ✓ querystring languageid is not active
+    returns
+      ✓ object
+
+  /api/administrator/localization/translation
+    exceptions
+      invalid-languageid
+        ✓ unspecified querystring languageid
+        ✓ invalid querystring languageid
+    returns
+      ✓ object
+
+  /api/user/localization/language
+    exceptions
+      invalid-languageid
+        ✓ unspecified querystring languageid
+        ✓ invalid querystring languageid
+    returns
+      ✓ object
+
+  /api/user/localization/languages
+    receives
+      ✓ optional querystring offset (integer)
+      ✓ optional querystring limit (integer)
+      ✓ optional querystring all (boolean)
+    returns
+      ✓ array
+    configuration
+      ✓ environment PAGE_SIZE
+
+  /api/user/localization/localization/set-account-language
+    exceptions
+      invalid-accountid
+        ✓ missing querystring accountid
+        ✓ invalid querystring accountid
+      invalid-account
+        ✓ ineligible accessing account
+      invalid-languageid
+        ✓ missing posted languageid
+        ✓ invalid posted languageid
+      invalid-language
+        ✓ inactive posted languageid
+    receives
+      ✓ required posted languageid
+    returns
+      ✓ object
+
+  /api/user/localization/translation
+    exceptions
+      invalid-languageid
+        ✓ unspecified querystring languageid
+        ✓ invalid querystring languageid
+    returns
+      ✓ object
+
+
+  80 passing (9m)
+
