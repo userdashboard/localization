@@ -29,7 +29,11 @@ module.exports = {
         navbar = navbar.substring(0, navbar.indexOf('"'))
         let navbarPath = path.join(global.applicationPath, 'src/www', navbar)
         if (!fs.existsSync(navbarPath)) {
-          navbarPath = require.resolve(`@userdashboard/dashboard/src/www${navbar}`)
+          try {
+            navbarPath = require.resolve(`@userdashboard/dashboard/src/www${navbar}`)
+          } catch (error) {
+            navbarPath = ''
+          }
           if (!navbarPath) {
             for (const moduleName of global.packageJSON.dashboard.moduleNames) {
               try {
