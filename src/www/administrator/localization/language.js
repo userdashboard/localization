@@ -23,7 +23,7 @@ async function beforeRequest (req) {
 }
 
 async function renderPage (req, res) {
-  const doc = dashboard.HTML.parse(req.html || req.route.html, req.data.language, 'language', req.language)
+  const doc = dashboard.HTML.parse(req.html || req.route.html, req.data.language, 'language')
   navbar.setup(doc, req.data.language)
   const removeElements = []
   if (req.data.language.active) {
